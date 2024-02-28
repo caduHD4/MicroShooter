@@ -1,0 +1,92 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Faculdade\\micro-shooter\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\micro-shooter\\micro-shooter\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\micro-shooter\\micro-shooter\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\micro-shooter\\micro-shooter\\enemy.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\enemy.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\micro-shooter\\micro-shooter\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "main.cpp",
+              "DocumentMoniker": "E:\\Faculdade\\micro-shooter\\micro-shooter\\main.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\main.cpp",
+              "ToolTip": "E:\\Faculdade\\micro-shooter\\micro-shooter\\main.cpp",
+              "RelativeToolTip": "micro-shooter\\main.cpp",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-28T22:50:40.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "enemy.hpp",
+              "DocumentMoniker": "E:\\Faculdade\\micro-shooter\\micro-shooter\\enemy.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\enemy.hpp",
+              "ToolTip": "E:\\Faculdade\\micro-shooter\\micro-shooter\\enemy.hpp",
+              "RelativeToolTip": "micro-shooter\\enemy.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-02-24T01:23:35.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "player.hpp",
+              "DocumentMoniker": "E:\\Faculdade\\micro-shooter\\micro-shooter\\player.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\player.hpp",
+              "ToolTip": "E:\\Faculdade\\micro-shooter\\micro-shooter\\player.hpp",
+              "RelativeToolTip": "micro-shooter\\player.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-02-24T01:25:28.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "player.cpp",
+              "DocumentMoniker": "E:\\Faculdade\\micro-shooter\\micro-shooter\\player.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\player.cpp",
+              "ToolTip": "E:\\Faculdade\\micro-shooter\\micro-shooter\\player.cpp",
+              "RelativeToolTip": "micro-shooter\\player.cpp",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-24T01:25:20.102Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
