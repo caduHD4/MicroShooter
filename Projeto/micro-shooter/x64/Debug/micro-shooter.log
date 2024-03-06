@@ -1,9 +1,2 @@
-﻿  enemy.cpp
-  main.cpp
-  game.cpp
-  object.hpp
-  player.cpp
-  player.hpp
-  Gerando Código...
-x64\Debug\player.obj : warning LNK4042: objeto especificado mais de uma vez; extras ignorados
-  micro-shooter.vcxproj -> E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shoote
+﻿  main.cpp
+  micro-shooter.vcxproj -> E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

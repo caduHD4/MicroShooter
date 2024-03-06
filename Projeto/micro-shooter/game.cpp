@@ -1,22 +1,11 @@
 #include "Game.hpp"
 
-Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+
+Game::Game()
 {
-	int flags = 0;
-	if (fullscreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-	{
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-
-		renderer = SDL_CreateRenderer(window, -1, 0);
-
-		isRunning = true;
-	} else {
-		isRunning = false;
-	}
+	setWindow(SDL_CreateWindow("Microshooter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, false));
+	setRenderer(SDL_CreateRenderer(window, -1, 0));
+	setIsRunning(true);
 }
 
 void Game::handleEvents()
@@ -30,10 +19,6 @@ void Game::handleEvents()
 		default:
 			break;
 	}
-}
-
-void Game::update()
-{
 }
 
 void Game::render()

@@ -5,14 +5,24 @@
 #include "object.hpp"
 
 class Player : public Object {
+private:
+	SDL_Rect rect;
+
 public:
 	Player();
-	void draw(SDL_Renderer* renderer);
+	void draw(SDL_Renderer* renderer) override final;
 	void moveUp();
 	void moveDown();
 	void moveLeft();
 	void moveRight();
 
-private:
-	SDL_Renderer *renderer;
+	SDL_Rect* getRect()
+	{
+		return &this->rect;
+	}
+
+	void setRect(SDL_Rect rect)
+	{
+		this->rect = rect;
+	}
 };

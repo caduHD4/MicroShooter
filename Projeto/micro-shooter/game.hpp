@@ -4,16 +4,38 @@
 #include<iostream>
 
 class Game {
-public:
+private:
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Surface* surface;
 	SDL_Renderer* renderer;
 
-	Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-	bool running() { return isRunning; };
+public:
+	Game();
 	void handleEvents();
-	void update();
 	void render();
 	void clean();
+
+	bool getIsRunning() {
+		return this->isRunning;
+	}
+
+	void setIsRunning(bool isRunning) {
+		this->isRunning = isRunning;
+	}
+
+	SDL_Window* getWindow() {
+		return this->window;
+	}
+
+	void setWindow(SDL_Window* window) {
+		this->window = window;
+	}
+
+	SDL_Renderer* getRenderer() {
+		return this->renderer;
+	}
+
+	void setRenderer(SDL_Renderer* renderer) {
+		this->renderer = renderer;
+	}
 };
