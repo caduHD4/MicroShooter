@@ -2,10 +2,12 @@
 
 Player::Player()
 {
+	SDL_Rect sdlRect = SDL_Rect();
+	setRect(sdlRect);
 	// float dt = 20;
 	// this->position += this->speed * dt;
 	Vector position = Vector(400, 400);
-	Vector speed = Vector(6, 1);
+	Vector speed = Vector(300, 300);
 	this->setPosition(position);
 	this->setSpeed(speed);
 	this->setWidth(40.0);
@@ -15,38 +17,30 @@ Player::Player()
 
 void Player::draw(SDL_Renderer* renderer)
 {
-	this->rect.x = this->getPosition().x;
-	this->rect.y = this->getPosition().y;
-	this->rect.w = this->getWidth();
-	this->rect.h = this->getHeight();
+	this->rect.x = getPosition().x;
+	this->rect.y = getPosition().y;
+	this->rect.w = getWidth();
+	this->rect.h = getHeight();
 	SDL_SetRenderDrawColor(renderer, 32, 33, 36, 255);
 	SDL_RenderFillRect(renderer, &rect);
 }
 
-void Player::moveUp()
+void Player::moveUp(float frameTime)
 {
-	float finalPosition = getPosition().y - (getSpeed().x * getSpeed().y);
-	Vector finalVector = Vector(getPosition().x, finalPosition);
-	setPosition(finalVector);
+	this->position.y -= getSpeed().y * frameTime;
 }
 
-void Player::moveDown()
+void Player::moveDown(float frameTime)
 {
-	float finalPosition = getPosition().y + (getSpeed().x * getSpeed().y);
-	Vector finalVector = Vector(getPosition().x, finalPosition);
-	setPosition(finalVector);
+	this->position.y += getSpeed().y * frameTime;
 }
 
-void Player::moveRight()
+void Player::moveRight(float frameTime)
 {
-	float finalPosition = getPosition().x + (getSpeed().x * getSpeed().y);
-	Vector finalVector = Vector(finalPosition, getPosition().y);
-	setPosition(finalVector);
+	this->position.x += getSpeed().x * frameTime;
 }
 
-void Player::moveLeft()
+void Player::moveLeft(float frameTime)
 {
-	float finalPosition = getPosition().x - (getSpeed().x * getSpeed().y);
-	Vector finalVector = Vector(finalPosition, getPosition().y);
-	setPosition(finalVector);
+	this->position.x -= getSpeed().x * frameTime;
 }

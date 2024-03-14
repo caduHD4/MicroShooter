@@ -1,2 +1,7 @@
-﻿  main.cpp
+﻿  game.cpp
+E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(10,22): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
+E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(18,25): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
+  main.cpp
+  Gerando Código...
+x64\Debug\player.obj : warning LNK4042: objeto especificado mais de uma vez; extras ignorados
   micro-shooter.vcxproj -> E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

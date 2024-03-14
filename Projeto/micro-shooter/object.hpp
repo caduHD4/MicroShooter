@@ -1,5 +1,6 @@
 #ifndef object_hpp
 #define object_hpp
+
 #include <stdio.h>
 #include <iostream>
 #include "math-vector.h"
@@ -8,7 +9,7 @@
 using Vector = Mylib::Math::Vector<float, 2>;
 class Object {
 	
-private:
+protected:
 	int life;
 	float height;
 	float width;
@@ -58,5 +59,4 @@ public:
 
 	virtual void draw(SDL_Renderer* renderer) = 0;
 };
-
 #endif

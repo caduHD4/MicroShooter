@@ -1,13 +1,26 @@
+#ifndef game_hpp
 #define game_hpp
-#include "SDL.h"
-#include <stdio.h>
-#include<iostream>
+
+#include <iostream>
+#include <list>
+#include "player.hpp"
+#include "enemy.hpp"
+#include "bullet.hpp"
+#include "graphic-interface.hpp"
 
 class Game {
 private:
 	bool isRunning;
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	std::list<Object*> objectList;
+	const Uint8* keys;
+	Player player;
+	Enemy enemy;
+	Bullet bullet;
+	float FPS;
+	float frameDelay;
+	Uint32 frameStart;
+	float frameTime;
+	GraphicInterface* graphicInterface;
 
 public:
 	Game();
@@ -39,3 +52,4 @@ public:
 		this->renderer = renderer;
 	}
 };
+#endif
