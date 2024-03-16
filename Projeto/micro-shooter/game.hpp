@@ -7,6 +7,7 @@
 #include "enemy.hpp"
 #include "bullet.hpp"
 #include "graphic-interface.hpp"
+#include "input-interface.hpp"
 
 class Game {
 private:
@@ -21,12 +22,12 @@ private:
 	Uint32 frameStart;
 	float frameTime;
 	GraphicInterface* graphicInterface;
+	InputInterface* inputInterface;
 
 public:
 	Game();
 	void handleEvents();
 	void render();
-	void clean();
 
 	bool getIsRunning() {
 		return this->isRunning;
@@ -34,22 +35,6 @@ public:
 
 	void setIsRunning(bool isRunning) {
 		this->isRunning = isRunning;
-	}
-
-	SDL_Window* getWindow() {
-		return this->window;
-	}
-
-	void setWindow(SDL_Window* window) {
-		this->window = window;
-	}
-
-	SDL_Renderer* getRenderer() {
-		return this->renderer;
-	}
-
-	void setRenderer(SDL_Renderer* renderer) {
-		this->renderer = renderer;
 	}
 };
 #endif

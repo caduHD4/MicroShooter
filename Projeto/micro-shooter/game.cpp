@@ -1,14 +1,17 @@
 #include "Game.hpp"
-#include "graphic-interface.hpp"
-#include "graphic-implement-sdl.hpp"
+#include "graphic-implement-sdl.cpp"
+#include "input-implement-sdl.cpp"
 
 Game::Game()
 {
+	const color backgroundColor = {0, 0, 255, 255};
 	graphicInterface = new GraphicImplementSdl();
+	inputInterface = new InputImplementSdl();
 	setIsRunning(true);
 	FPS = 60.0;
 	frameDelay = 1000.0 / FPS;
 	frameTime = 0;
+	inputInterface->getInputs();
 
 	while (getIsRunning())
 	{
@@ -17,14 +20,17 @@ Game::Game()
 		{
 			SDL_Delay(frameDelay - frameTime);
 		}
-		render();
-		handleEvents();
-		player.draw(getRenderer());
-		enemy.draw(getRenderer());
+		graphicInterface->clearRender(backgroundColor);
+
+		inputInterface->handleInputEvents();
+
+		if (inputInterface->keyPressed == 1)
+		{
+			player.moveLeft(frameTime);
+		}
 
 		if (keys[SDL_SCANCODE_RIGHT])
 		{
-			player.moveRight(frameTime);
 		}
 		if (keys[SDL_SCANCODE_LEFT])
 		{
@@ -61,12 +67,11 @@ Game::Game()
 			player.setPosition(finalPosition);
 			player.setSpeed(Vector(0, 1));
 		}*/
-		SDL_RenderPresent(getRenderer());
-
+		graphicInterface->updateRender();
 		frameTime = static_cast<float>(SDL_GetTicks() - frameStart) / 1000.0f;
 	}
 
-	clean();
+	graphicInterface->cleanWindow();
 }
 
 void Game::handleEvents()
@@ -80,17 +85,4 @@ void Game::handleEvents()
 		default:
 			break;
 	}
-}
-
-void Game::render()
-{
-	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-	SDL_RenderClear(renderer);
-}
-
-void Game::clean()
-{
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
 }

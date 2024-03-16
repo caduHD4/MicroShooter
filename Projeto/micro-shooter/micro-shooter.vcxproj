@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="graphic-implement-sdl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="object.hpp" />
@@ -143,6 +144,8 @@
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="graphic-implement-sdl.hpp" />
+    <ClInclude Include="graphic-interface.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

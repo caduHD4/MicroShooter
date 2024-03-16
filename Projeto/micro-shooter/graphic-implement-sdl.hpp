@@ -8,15 +8,17 @@
 class GraphicImplementSdl : public GraphicInterface
 {
 	private:
-		const Uint8* keys;
 		SDL_Window* window;
 		SDL_Renderer* sdlRenderer;
 
 	public:
 		GraphicImplementSdl();
-		void showWindow() override final;
-		void drawRect(const rect&) override final;
+		void showWindow(const windows&) override final;
+		void drawRect(const rect&, const color&) override final;
 		void createRenderer() override final;
+		void cleanWindow() override final;
+		void clearRender(const color&) override final;
+		void updateRender() override final;
 
 		SDL_Window* getWindow()
 		{
@@ -26,16 +28,6 @@ class GraphicImplementSdl : public GraphicInterface
 		void setWindow(SDL_Window* window)
 		{
 			this->window = window;
-		}
-
-		const Uint8* getKeys()
-		{
-			return this->keys;
-		}
-
-		void setKeys(const Uint8* keys)
-		{
-			this->keys = keys;
 		}
 
 		SDL_Renderer* getSdlRenderer()

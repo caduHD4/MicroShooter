@@ -6,6 +6,15 @@
 #include <stdint.h>
 
 using Vector = Mylib::Math::Vector<float, 2>;
+
+struct windows {
+	const char* title;
+	Vector position;
+	float height;
+	float width;
+	bool fullscreen;
+};
+
 struct rect {
 	Vector position;
 	float width;
@@ -22,8 +31,11 @@ struct color {
 class GraphicInterface
 {
 	public:
-		virtual void drawRect(const rect&) = 0;
-		virtual void showWindow() = 0;
+		virtual void drawRect(const rect&, const color&) = 0;
+		virtual void showWindow(const windows&) = 0;
 		virtual void createRenderer() = 0;
+		virtual void cleanWindow() = 0;
+		virtual void clearRender(const color&) = 0;
+		virtual void updateRender() = 0;
 };
 #endif
