@@ -7,7 +7,7 @@
 #include "enemy.hpp"
 #include "bullet.hpp"
 #include "graphic-interface.hpp"
-#include "input-interface.hpp"
+#include "event-interface.hpp"
 
 class Game {
 private:
@@ -22,11 +22,10 @@ private:
 	Uint32 frameStart;
 	float frameTime;
 	GraphicInterface* graphicInterface;
-	InputInterface* inputInterface;
+	EventInterface* eventInterface;
 
 public:
 	Game();
-	void handleEvents();
 	void render();
 
 	bool getIsRunning() {

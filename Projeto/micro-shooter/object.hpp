@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <iostream>
 #include "math-vector.h"
-#include "SDL.h"
 
 using Vector = Mylib::Math::Vector<float, 2>;
 class Object {
@@ -56,7 +55,5 @@ public:
 	{
 		this->height = height;
 	}
-
-	virtual void draw(SDL_Renderer* renderer) = 0;
 };
 #endif
