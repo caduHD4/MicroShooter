@@ -1,19 +1,4 @@
-﻿  graphic-implement-sdl.cpp
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(12,131): warning C4244: 'argumento': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(12,111): warning C4244: 'argumento': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(12,95): warning C4244: 'argumento': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(12,70): warning C4244: 'argumento': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,45): warning C4838: a conversão de 'const float' em 'int' requer uma conversão de restrição
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,45): warning C4244: 'inicializando': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,68): warning C4838: a conversão de 'const float' em 'int' requer uma conversão de restrição
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,68): warning C4244: 'inicializando': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,82): warning C4838: a conversão de 'const float' em 'int' requer uma conversão de restrição
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,82): warning C4244: 'inicializando': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,100): warning C4838: a conversão de 'const float' em 'int' requer uma conversão de restrição
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,100): warning C4244: 'inicializando': conversão de 'const float' para 'int', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(18,91): warning C4244: 'argumento': conversão de 'const float' para 'Uint8', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(36,99): warning C4244: 'argumento': conversão de 'const float' para 'Uint8', possível perda de dados
-game.obj : error LNK2005: "public: __cdecl GraphicImplementSdl::GraphicImplementSdl(void)" (??0GraphicImplementSdl@@QEAA@XZ) já definida no graphic-implement-sdl.obj
+﻿game.obj : error LNK2005: "public: __cdecl GraphicImplementSdl::GraphicImplementSdl(void)" (??0GraphicImplementSdl@@QEAA@XZ) já definida no graphic-implement-sdl.obj
 game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::cleanWindow(void)" (?cleanWindow@GraphicImplementSdl@@UEAAXXZ) já definida no graphic-implement-sdl.obj
 game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::clearRender(struct color const &)" (?clearRender@GraphicImplementSdl@@UEAAXAEBUcolor@@@Z) já definida no graphic-implement-sdl.obj
 game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::createRenderer(void)" (?createRenderer@GraphicImplementSdl@@UEAAXXZ) já definida no graphic-implement-sdl.obj
