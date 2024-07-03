@@ -13,3 +13,14 @@ E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,100
 E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(17,100): warning C4244: 'inicializando': conversão de 'const float' para 'int', possível perda de dados
 E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(18,91): warning C4244: 'argumento': conversão de 'const float' para 'Uint8', possível perda de dados
 E:\Faculdade\MicroShooter\Projeto\micro-shooter\graphic-implement-sdl.cpp(36,99): warning C4244: 'argumento': conversão de 'const float' para 'Uint8', possível perda de dados
+game.obj : error LNK2005: "public: __cdecl GraphicImplementSdl::GraphicImplementSdl(void)" (??0GraphicImplementSdl@@QEAA@XZ) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::cleanWindow(void)" (?cleanWindow@GraphicImplementSdl@@UEAAXXZ) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::clearRender(struct color const &)" (?clearRender@GraphicImplementSdl@@UEAAXAEBUcolor@@@Z) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::createRenderer(void)" (?createRenderer@GraphicImplementSdl@@UEAAXXZ) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::drawRect(struct rect const &,struct color const &)" (?drawRect@GraphicImplementSdl@@UEAAXAEBUrect@@AEBUcolor@@@Z) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl EventImplementSdl::handleEvents(void)" (?handleEvents@EventImplementSdl@@UEAAXXZ) já definida no event-implement-sdl.obj
+game.obj : error LNK2005: "public: void __cdecl EventImplementSdl::handleInputEvents(union SDL_Event &)" (?handleInputEvents@EventImplementSdl@@QEAAXAEATSDL_Event@@@Z) já definida no event-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::showWindow(struct windows const &)" (?showWindow@GraphicImplementSdl@@UEAAXAEBUwindows@@@Z) já definida no graphic-implement-sdl.obj
+game.obj : error LNK2005: "public: virtual void __cdecl GraphicImplementSdl::updateRender(void)" (?updateRender@GraphicImplementSdl@@UEAAXXZ) já definida no graphic-implement-sdl.obj
+x64\Debug\player.obj : warning LNK4042: objeto especificado mais de uma vez; extras ignorados
+E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shooter.exe : fatal error LNK1169: encontrados um ou mais símbolos múltiplos definidos

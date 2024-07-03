@@ -26,7 +26,6 @@ private:
 
 public:
 	Game();
-	void render();
 
 	bool getIsRunning() {
 		return this->isRunning;

@@ -8,12 +8,31 @@
 class EventImplementSdl : public EventInterface
 {
 private:
-	Player player;
+	float frameTime;
+	bool isRunning;
 
 public:
-	EventImplementSdl();
-
 	void handleEvents() override final;
 	void handleInputEvents(SDL_Event& event);
+
+	float getFrameTime()
+	{
+		return this->frameTime;
+	}
+
+	void setFrameTime(float frameTime)
+	{
+		this->frameTime = frameTime;
+	}
+
+	bool getIsRunning()
+	{
+		return this->isRunning;
+	}
+
+	void setIsRunning(bool isRunning)
+	{
+		this->isRunning = isRunning;
+	}
 };
 #endif

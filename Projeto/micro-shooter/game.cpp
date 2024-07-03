@@ -21,6 +21,7 @@ Game::Game()
 		}
 		graphicInterface->clearRender(backgroundColor);
 
+		eventInterface->setPlayer(player);
 		eventInterface->handleEvents();
 
 		/*if (SDL_HasIntersection(this->player.getRect(), this->enemy.getRect()) == 0)

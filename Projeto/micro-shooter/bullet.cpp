@@ -13,16 +13,6 @@ Bullet::Bullet(Vector position)
 	this->setLife(3);
 }
 
-void Bullet::draw(SDL_Renderer* renderer)
-{
-	this->rect.x = this->getPosition().x;
-	this->rect.y = this->getPosition().y;
-	this->rect.w = this->getWidth();
-	this->rect.h = this->getHeight();
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	SDL_RenderFillRect(renderer, &rect);
-}
-
 void Bullet::moveUp()
 {
 	float finalPosition = this->getPosition().y - (this->getSpeed().x * this->getSpeed().y);

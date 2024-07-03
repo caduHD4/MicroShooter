@@ -2,11 +2,13 @@
 #define event_interface_hpp
 
 #include <stdio.h>
+#include "player.hpp"
 
 class EventInterface
 {
 private:
 	Player player;
+
 public:
 	virtual void handleEvents() = 0;
 	Player& getPlayer()

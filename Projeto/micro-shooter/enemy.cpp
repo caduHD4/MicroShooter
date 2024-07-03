@@ -2,10 +2,6 @@
 
 Enemy::Enemy()
 {
-	SDL_Rect sdlRect = SDL_Rect();
-	setRect(sdlRect);
-	// float dt = 20;
-	// this->position += this->speed * dt;
 	Vector position = Vector(400, 400);
 	Vector speed = Vector(300, 300);
 	this->setPosition(position);
@@ -13,16 +9,6 @@ Enemy::Enemy()
 	this->setWidth(40.0);
 	this->setHeight(40.0);
 	this->setLife(3);
-}
-
-void Enemy::draw(SDL_Renderer* renderer)
-{
-	this->rect.x = this->getPosition().x;
-	this->rect.y = this->getPosition().y;
-	this->rect.w = this->getWidth();
-	this->rect.h = this->getHeight();
-	SDL_SetRenderDrawColor(renderer, 32, 33, 36, 255);
-	SDL_RenderFillRect(renderer, &rect);
 }
 
 void Enemy::moveUp()
