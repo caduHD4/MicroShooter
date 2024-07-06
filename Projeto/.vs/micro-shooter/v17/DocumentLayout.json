@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "E:\\Faculdade\\MicroShooter\\Projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\graphic-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +34,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "graphic-implement-sdl.hpp",
-              "DocumentMoniker": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp",
-              "RelativeDocumentMoniker": "micro-shooter\\graphic-implement-sdl.hpp",
-              "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp",
-              "RelativeToolTip": "micro-shooter\\graphic-implement-sdl.hpp",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACYAAAADAAAA",
+              "DocumentIndex": 3,
+              "Title": "event-implement-sdl.cpp",
+              "DocumentMoniker": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\event-implement-sdl.cpp",
+              "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp",
+              "RelativeToolTip": "micro-shooter\\event-implement-sdl.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-06T01:10:49.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "event-interface.hpp",
+              "DocumentMoniker": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\event-interface.hpp",
+              "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp",
+              "RelativeToolTip": "micro-shooter\\event-interface.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-03T23:05:47.07Z",
+              "WhenOpened": "2024-07-06T01:10:20.871Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "event-implement-sdl.hpp",
+              "DocumentMoniker": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\event-implement-sdl.hpp",
+              "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp",
+              "RelativeToolTip": "micro-shooter\\event-implement-sdl.hpp",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-06T01:10:09.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "game.cpp",
               "DocumentMoniker": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\game.cpp",
               "RelativeDocumentMoniker": "micro-shooter\\game.cpp",
               "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\game.cpp",
               "RelativeToolTip": "micro-shooter\\game.cpp",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAhAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-03T23:01:17.804Z",
+              "WhenOpened": "2024-07-06T00:52:12.664Z",
               "EditorCaption": ""
             }
           ]

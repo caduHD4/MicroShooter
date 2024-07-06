@@ -3,12 +3,7 @@
 
 #include <iostream>
 #include "object.hpp"
-
-struct Rect {
-	Vector position;
-	float width;
-	float height;
-};
+#include "graphic-implement-sdl.hpp"
 
 class Player : public Object
 {
@@ -22,11 +17,11 @@ public:
 	void moveLeft(float frameTime);
 	void moveRight(float frameTime);
 
-	Rect getRect() {
+	Rect& getRect() {
 		return this->rect;
 	}
 
-	void setRect(Rect rect) {
+	void setRect(const Rect& rect) {
 		this->rect = rect;
 	}
 };

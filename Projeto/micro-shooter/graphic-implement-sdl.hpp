@@ -14,10 +14,10 @@ class GraphicImplementSdl : public GraphicInterface
 	public:
 		GraphicImplementSdl();
 		void showWindow(const windows&) override final;
-		void drawRect(const rect&, const color&) override final;
+		void drawRect(const Rect&, const Color&) override final;
 		void createRenderer() override final;
 		void cleanWindow() override final;
-		void clearRender(const color&) override final;
+		void clearRender(const Color&) override final;
 		void updateRender() override final;
 
 		SDL_Window* getWindow()

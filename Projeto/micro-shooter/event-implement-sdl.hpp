@@ -9,7 +9,6 @@ class EventImplementSdl : public EventInterface
 {
 private:
 	float frameTime;
-	bool isRunning;
 
 public:
 	void handleEvents() override final;
@@ -23,16 +22,6 @@ public:
 	void setFrameTime(float frameTime)
 	{
 		this->frameTime = frameTime;
-	}
-
-	bool getIsRunning()
-	{
-		return this->isRunning;
-	}
-
-	void setIsRunning(bool isRunning)
-	{
-		this->isRunning = isRunning;
 	}
 };
 #endif

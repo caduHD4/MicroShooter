@@ -12,7 +12,7 @@ void GraphicImplementSdl::showWindow(const windows& createWindow)
 	setWindow(SDL_CreateWindow(createWindow.title, createWindow.position.x, createWindow.position.y, createWindow.width, createWindow.height, createWindow.fullscreen));
 }
 
-void GraphicImplementSdl::drawRect(const rect& objectRect, const color& colorRect)
+void GraphicImplementSdl::drawRect(const Rect& objectRect, const Color& colorRect)
 {
 	const SDL_Rect rect = { objectRect.position.x, objectRect.position.y, objectRect.width, objectRect.height };
 	SDL_SetRenderDrawColor(getSdlRenderer(), colorRect.r, colorRect.g, colorRect.b, colorRect.a);
@@ -31,7 +31,7 @@ void GraphicImplementSdl::cleanWindow()
 	SDL_Quit();
 }
 
-void GraphicImplementSdl::clearRender(const color& colorRender)
+void GraphicImplementSdl::clearRender(const Color& colorRender)
 {
 	SDL_SetRenderDrawColor(getSdlRenderer(), colorRender.r, colorRender.g, colorRender.b, colorRender.a);
 	SDL_RenderClear(getSdlRenderer());

@@ -15,13 +15,13 @@ struct windows {
 	bool fullscreen;
 };
 
-struct rect {
+struct Rect {
 	Vector position;
 	float width;
 	float height;
 };
 
-struct color {
+struct Color {
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
@@ -31,11 +31,11 @@ struct color {
 class GraphicInterface
 {
 	public:
-		virtual void drawRect(const rect&, const color&) = 0;
+		virtual void drawRect(const Rect&, const Color&) = 0;
 		virtual void showWindow(const windows&) = 0;
 		virtual void createRenderer() = 0;
 		virtual void cleanWindow() = 0;
-		virtual void clearRender(const color&) = 0;
+		virtual void clearRender(const Color&) = 0;
 		virtual void updateRender() = 0;
 };
 #endif

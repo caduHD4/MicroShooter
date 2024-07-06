@@ -1,18 +1,20 @@
 #include "Game.hpp"
-#include "graphic-implement-sdl.cpp"
-#include "event-implement-sdl.cpp"
+#include "graphic-implement-sdl.hpp"
+#include "event-implement-sdl.hpp"
 
 Game::Game()
 {
-	const color backgroundColor = {0, 0, 255, 255};
+	const Color backgroundColor = { 0, 0, 255, 255 };
+	const Color playerColor = { 0, 255, 0, 255 };
+	const Rect playerRect = { Vector(300, 300) , 100, 100};
 	graphicInterface = new GraphicImplementSdl();
 	eventInterface = new EventImplementSdl();
-	setIsRunning(true);
+	eventInterface->setIsRunning(true);
 	FPS = 60.0;
 	frameDelay = 1000.0 / FPS;
 	frameTime = 0;
 
-	while (getIsRunning())
+	while (eventInterface->getIsRunning())
 	{
 		frameStart = SDL_GetTicks();
 		if (frameDelay > frameTime)
@@ -20,7 +22,8 @@ Game::Game()
 			SDL_Delay(frameDelay - frameTime);
 		}
 		graphicInterface->clearRender(backgroundColor);
-
+		player.setRect(playerRect);
+		graphicInterface->drawRect(player.getRect(), playerColor);
 		eventInterface->setPlayer(player);
 		eventInterface->handleEvents();
 
