@@ -21,33 +21,49 @@ void EventImplementSdl::handleEvents()
 
 void EventImplementSdl::handleInputEvents(SDL_Event& event)
 {
-	switch (event.key.keysym.sym) {
-		case SDLK_LEFT: {
-			this->getPlayer().moveLeft(this->getFrameTime());
-			break;
-		}
+    switch (event.type) {
+    case SDL_KEYDOWN: {
+        switch (event.key.keysym.sym) {
+        case SDLK_LEFT: {
+            printf("Tecla LEFT pressionada\n");
+            this->getPlayer().moveLeft(this->getFrameTime());
+            break;
+        }
 
-		case SDLK_RIGHT: {
-			this->getPlayer().moveRight(this->getFrameTime());
-			break;
-		}
+        case SDLK_RIGHT: {
+            printf("Tecla RIGHT pressionada\n");
+            this->getPlayer().moveRight(this->getFrameTime());
+            break;
+        }
 
-		case SDLK_UP: {
-			this->getPlayer().moveUp(this->getFrameTime());
-			break;
-		}
+        case SDLK_UP: {
+            printf("Tecla UP pressionada\n");
+            this->getPlayer().moveUp(this->getFrameTime());
+            break;
+        }
 
-		case SDLK_DOWN: {
-			this->getPlayer().moveDown(this->getFrameTime());
-			break;
-		}
+        case SDLK_DOWN: {
+            printf("Tecla DOWN pressionada\n");
+            this->getPlayer().moveDown(this->getFrameTime());
+            break;
+        }
 
-		case SDLK_ESCAPE: {
-			break;
-		}
+        case SDLK_ESCAPE: {
+            printf("Tecla ESC pressionada\n");
+            // Lógica para lidar com ESC, se necessário
+            break;
+        }
 
-		case SDLK_z: {
-			break;
-		}
-	}
+        case SDLK_z: {
+            printf("Tecla Z pressionada\n");
+            // Lógica para lidar com Z, se necessário
+            break;
+        }
+
+        default:
+            break;
+        }
+        break;
+    }
+    }
 }

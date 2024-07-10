@@ -1,4 +1,1 @@
-﻿  game.cpp
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(14,22): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
-E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(22,25): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
-  micro-shooter.vcxproj -> E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shooter.exe
+﻿  micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

@@ -8,21 +8,18 @@
 class Player : public Object
 {
 private:
-	Rect rect;
+    Rect rect;
 
 public:
-	Player();
-	void moveUp(float frameTime);
-	void moveDown(float frameTime);
-	void moveLeft(float frameTime);
-	void moveRight(float frameTime);
+    Player();
+    void moveUp(float frameTime);
+    void moveDown(float frameTime);
+    void moveLeft(float frameTime);
+    void moveRight(float frameTime);
 
-	Rect& getRect() {
-		return this->rect;
-	}
-
-	void setRect(const Rect& rect) {
-		this->rect = rect;
-	}
+    Rect& getRect();
+    void setRect(const Rect& rect);
 };
+
 #endif
+
