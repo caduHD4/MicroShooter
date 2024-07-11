@@ -3,6 +3,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "object.hpp"
+#pragma once
 
 class Bullet : public Object {
 

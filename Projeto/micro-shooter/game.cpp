@@ -1,12 +1,14 @@
 #include "game.hpp"
 #include "graphic-implement-sdl.hpp"
 #include "event-implement-sdl.hpp"
+#include "bullet.hpp"
 
 Game::Game()
 {
-    const Color backgroundColor = { 0, 0, 255, 255 };
-    const Color playerColor = { 0, 255, 0, 255 };
-    Rect playerRect = { Vector(300, 300), 40, 40 };
+    const Color backgroundColor = {0, 0, 255, 255};
+    const Color playerColor = {0, 255, 0, 255};
+    const Color bulletColor = {255, 255, 255, 255};
+    Rect playerRect = {Vector(300, 300), 40, 40};
 
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -17,6 +19,7 @@ Game::Game()
 
     // Inicialize o estado do teclado
     keys = SDL_GetKeyboardState(NULL);
+
 
     while (eventInterface->getIsRunning()) {
         frameStart = SDL_GetTicks();
@@ -30,33 +33,60 @@ Game::Game()
         // Verifique se as teclas foram pressionadas
         if (keys != nullptr) {
             if (keys[SDL_SCANCODE_LEFT]) {
-                playerRect.position.x -= player.getSpeed().x * frameTime;
+                player.moveLeft(frameTime);
             }
             if (keys[SDL_SCANCODE_RIGHT]) {
-                playerRect.position.x += player.getSpeed().x * frameTime;
+                player.moveRight(frameTime);
             }
             if (keys[SDL_SCANCODE_UP]) {
-                playerRect.position.y -= player.getSpeed().y * frameTime;
+                player.moveUp(frameTime);
             }
             if (keys[SDL_SCANCODE_DOWN]) {
-                playerRect.position.y += player.getSpeed().y * frameTime;
+                player.moveDown(frameTime);
+            }
+            if (keys[SDL_SCANCODE_Z]) {
+                shootBullet();
             }
         }
+
+
+        for (auto& bullet : bullets) {
+            bullet->moveUp(); // Ou a dire√ß√£o desejada
+            // Desenhe a bala
+            Rect bulletRect = {bullet->getPosition(), bullet->getWidth(), bullet->getHeight()};
+            graphicInterface->drawRect(bulletRect, bulletColor); // Defina bulletColor conforme necess√°rio
+            graphicInterface->updateRender(); // Atualize a renderiza√ß√£o ap√≥s desenhar a bala
+        }
+
+auto bulletRemover = [](Bullet* b) -> bool {
+    if (b->getPosition().y < 0) {
+        delete b; // Libera a mem√≥ria da bala
+        return true; // Marca para remo√ß√£o da lista
+    }
+    return false;
+};
+bullets.remove_if(bulletRemover);
 
         // Limpe a tela
         graphicInterface->clearRender(backgroundColor);
 
-        // Defina a posiÁ„o do ret‚ngulo do jogador
-        player.setRect(playerRect);
+        // Defina a posiÔøΩÔøΩo do retÔøΩngulo do jogador
+        playerRect = {player.getPosition(), 40, 40};
 
-        // Desenhe o jogador na tela com a nova posiÁ„o
-        graphicInterface->drawRect(player.getRect(), playerColor);
+        // Desenhe o jogador na tela com a nova posiÔøΩÔøΩo
+        graphicInterface->drawRect(playerRect, playerColor);
 
-        // Atualize a renderizaÁ„o
+        // Atualize a renderizaÔøΩÔøΩo
         graphicInterface->updateRender();
 
         frameTime = static_cast<float>(SDL_GetTicks() - frameStart) / 1000.0f;
     }
 
     graphicInterface->cleanWindow();
+}
+
+void Game::shootBullet() {
+    Vector playerPos = player.getPosition();
+    Bullet* newBullet = new Bullet(playerPos + Vector(player.getWidth() / 2, 0)); // Ajuste a posi√ß√£o inicial conforme necess√°rio
+    bullets.push_back(newBullet);
 }

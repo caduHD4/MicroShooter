@@ -1,1 +1,3 @@
-﻿  micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe
+﻿  game.cpp
+D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(27,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
+  micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

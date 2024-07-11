@@ -8,6 +8,7 @@
 #include "bullet.hpp"
 #include "graphic-interface.hpp"
 #include "event-interface.hpp"
+#include <list>
 
 class Game {
 private:
@@ -23,6 +24,8 @@ private:
 	float frameTime;
 	GraphicInterface* graphicInterface;
 	EventInterface* eventInterface;
+	std::list<Bullet*> bullets;
+	void shootBullet();
 
 public:
 	Game();
@@ -34,5 +37,6 @@ public:
 	void setIsRunning(bool isRunning) {
 		this->isRunning = isRunning;
 	}
+
 };
 #endif
