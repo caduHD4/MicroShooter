@@ -5,7 +5,7 @@ Bullet::Bullet()
 }
 Bullet::Bullet(Vector position)
 {
-	Vector speed = Vector(6, 1);
+	Vector speed = Vector(12, 1);
 	this->setPosition(position);
 	this->setSpeed(speed);
 	this->setWidth(40);

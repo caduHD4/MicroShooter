@@ -7,7 +7,7 @@
 class EventInterface
 {
 private:
-	Player player;
+	Player player; // Player duplicando, declarar como ponteiro
 	bool isRunning;
 
 public:

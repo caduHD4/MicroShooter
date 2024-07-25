@@ -3,24 +3,80 @@
   "WorkspaceRootPath": "D:\\git\\MicroShooter\\Projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\keyboard-event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:micro-shooter\\keyboard-event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\object.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\object.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\graphic-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\bullet.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\game.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\event-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\graphic-interface.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\graphic-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\enemy.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26B86ED7-E944-41AA-A9FB-01278A87CC34}|micro-shooter\\micro-shooter.vcxproj|solutionrelative:micro-shooter\\enemy.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:micro-shooter\\input-handler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\keyboard-event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:micro-shooter\\keyboard-event-implement-sdl.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\keyboard-event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:micro-shooter\\keyboard-event-implement-sdl.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:micro-shooter\\input-handler.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,20 +86,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "game.cpp",
               "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.cpp",
               "RelativeDocumentMoniker": "micro-shooter\\game.cpp",
               "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.cpp",
               "RelativeToolTip": "micro-shooter\\game.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABgAAAAuAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAowFgAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-10T22:45:45.403Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -51,32 +108,215 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "object.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\object.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\object.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\object.hpp",
+              "RelativeToolTip": "micro-shooter\\object.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-24T22:42:54.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "event-implement-sdl.cpp",
               "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp",
               "RelativeDocumentMoniker": "micro-shooter\\event-implement-sdl.cpp",
               "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.cpp",
               "RelativeToolTip": "micro-shooter\\event-implement-sdl.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-12T23:10:46.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "player.cpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\player.cpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.cpp",
+              "RelativeToolTip": "micro-shooter\\player.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-13T00:52:34.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "graphic-implement-sdl.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\graphic-implement-sdl.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.hpp",
+              "RelativeToolTip": "micro-shooter\\graphic-implement-sdl.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-24T22:27:06.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "player.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\player.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\player.hpp",
+              "RelativeToolTip": "micro-shooter\\player.hpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-13T00:30:16.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\main.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\main.cpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\main.cpp",
+              "RelativeToolTip": "micro-shooter\\main.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-13T01:00:34.888Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "bullet.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\bullet.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.hpp",
+              "RelativeToolTip": "micro-shooter\\bullet.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-24T22:43:54.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "bullet.cpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\bullet.cpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\bullet.cpp",
+              "RelativeToolTip": "micro-shooter\\bullet.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-24T22:32:25.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "game.hpp",
               "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.hpp",
               "RelativeDocumentMoniker": "micro-shooter\\game.hpp",
               "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\game.hpp",
               "RelativeToolTip": "micro-shooter\\game.hpp",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAvwBgAAAAvAAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAABsAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-11T00:27:21.573Z"
+              "WhenOpened": "2024-07-11T00:27:21.573Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
+              "Title": "event-interface.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\event-interface.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-interface.hpp",
+              "RelativeToolTip": "micro-shooter\\event-interface.hpp",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-13T00:20:23.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "graphic-interface.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-interface.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\graphic-interface.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-interface.hpp",
+              "RelativeToolTip": "micro-shooter\\graphic-interface.hpp",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-24T22:29:48.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "event-implement-sdl.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\event-implement-sdl.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\event-implement-sdl.hpp",
+              "RelativeToolTip": "micro-shooter\\event-implement-sdl.hpp",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAEwAsAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-12T23:55:08.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "graphic-implement-sdl.cpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\graphic-implement-sdl.cpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\graphic-implement-sdl.cpp",
+              "RelativeToolTip": "micro-shooter\\graphic-implement-sdl.cpp",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAABwAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-13T00:40:27.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "enemy.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\enemy.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\enemy.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\enemy.hpp",
+              "RelativeToolTip": "micro-shooter\\enemy.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-24T22:43:50.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "input-handler.cpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.cpp",
+              "RelativeDocumentMoniker": "micro-shooter\\input-handler.cpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.cpp",
+              "RelativeToolTip": "micro-shooter\\input-handler.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-13T00:45:55.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "input-handler.hpp",
+              "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.hpp",
+              "RelativeDocumentMoniker": "micro-shooter\\input-handler.hpp",
+              "ToolTip": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\input-handler.hpp",
+              "RelativeToolTip": "micro-shooter\\input-handler.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-13T01:23:42.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "keyboard-event-implement-sdl.hpp",
               "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\keyboard-event-implement-sdl.hpp",
               "RelativeDocumentMoniker": "micro-shooter\\keyboard-event-implement-sdl.hpp",
@@ -88,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "keyboard-event-implement-sdl.cpp",
               "DocumentMoniker": "D:\\git\\MicroShooter\\Projeto\\micro-shooter\\keyboard-event-implement-sdl.cpp",
               "RelativeDocumentMoniker": "micro-shooter\\keyboard-event-implement-sdl.cpp",
@@ -96,8 +336,7 @@
               "RelativeToolTip": "micro-shooter\\keyboard-event-implement-sdl.cpp",
               "ViewState": "AQIAAAEAAAAAAAAAAAAswBUAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-11T00:17:32.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T00:17:32.852Z"
             }
           ]
         }

@@ -9,6 +9,7 @@ class EventImplementSdl : public EventInterface
 {
 private:
 	float frameTime;
+	int shootcooldown;
 
 public:
 	void handleEvents() override final;

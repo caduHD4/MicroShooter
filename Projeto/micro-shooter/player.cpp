@@ -3,7 +3,7 @@
 Player::Player()
 {
     Vector position = Vector(400, 400);
-    Vector speed = Vector(300, 300);
+    Vector speed = Vector(400, 400);
     this->setPosition(position);
     this->setSpeed(speed);
     this->setWidth(40.0);
