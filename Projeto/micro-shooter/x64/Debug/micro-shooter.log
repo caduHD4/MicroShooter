@@ -1,3 +1,7 @@
 ﻿  game.cpp
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(37,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
+  player.cpp
+D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(43,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
+  Gerando Código...
+  LINK : D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
+x64\Debug\player.obj : warning LNK4042: objeto especificado mais de uma vez; extras ignorados
   micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+	// Posição inicial do jogador, tamanho, vida e velocidade
     Vector position = Vector(400, 400);
     Vector speed = Vector(400, 400);
     this->setPosition(position);
@@ -14,7 +15,7 @@ Player::Player()
 void Player::moveUp(float frameTime)
 {
     float newY = this->position.y - getSpeed().y * frameTime;
-    // Limitar ao topo da janela
+    // Limita ao topo da janela
     if (newY >= 0) {
         this->position.y = newY;
     }
@@ -23,7 +24,7 @@ void Player::moveUp(float frameTime)
 void Player::moveDown(float frameTime)
 {
     float newY = this->position.y + getSpeed().y * frameTime;
-    // Limitar à parte inferior da janela
+    // Limita à parte inferior da janela
     if (newY <= (720 - this->getHeight())) {
         this->position.y = newY;
     }
@@ -32,7 +33,7 @@ void Player::moveDown(float frameTime)
 void Player::moveRight(float frameTime)
 {
     float newX = this->position.x + getSpeed().x * frameTime;
-    // Limitar ao lado direito da janela
+    // Limita ao lado direito da janela
     if (newX <= (720 - this->getWidth())) {
         this->position.x = newX;
     }
@@ -41,7 +42,7 @@ void Player::moveRight(float frameTime)
 void Player::moveLeft(float frameTime)
 {
     float newX = this->position.x - getSpeed().x * frameTime;
-    // Limitar ao lado esquerdo da janela
+    // Limita ao lado esquerdo da janela
     if (newX >= 0) {
         this->position.x = newX;
     }

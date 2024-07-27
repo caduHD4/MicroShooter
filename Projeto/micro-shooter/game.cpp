@@ -4,24 +4,30 @@
 #include "bullet.hpp"
 
 Game::Game() {
+	// fundo, tela, jogador e balas
     const Color backgroundColor = { 0, 0, 255, 255 };
     const Color playerColor = { 0, 255, 0, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     Rect playerRect = { Vector(300, 300), 40, 40 };
+    //Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
     eventInterface->setIsRunning(true);
+    //Lida com o framerate
     FPS = 60.0f;
     frameDelay = 1000.0f / FPS;
     frameTime = 0;
+    // Detectação das teclas
     keys = SDL_GetKeyboardState(NULL);
     Uint32 lastUpdateTick = SDL_GetTicks();
+    // Delay da bala
     lastShotTime = 0;
 
     // Spawna o inimigo a 200 pixels do jogador
     Vector enemyPosition = player.getPosition() + Vector(200, 0);
     enemy.setPosition(enemyPosition);
 
+	//Looping principal do jogo
     while (eventInterface->getIsRunning()) {
         frameStart = SDL_GetTicks();
 
@@ -44,6 +50,7 @@ Game::Game() {
     graphicInterface->cleanWindow();
 }
 
+// Move o jogador e as balas
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_LEFT]) {
@@ -67,7 +74,7 @@ void Game::update(float deltaTime) {
         bullet->moveUp();
     }
 
-
+	// Colisão do jogador com o inimigo
     if (player.getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
         player.getPosition().x + player.getWidth() > enemy.getPosition().x &&
         player.getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
@@ -77,7 +84,7 @@ void Game::update(float deltaTime) {
         enemy.setLife(enemy.getLife() - 1);
     }
 
-
+	// Colisão da bala com o inimigo
     bool collisionDetected = false;
     for (auto& bullet : bullets) {
         if (bullet->getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
@@ -113,6 +120,7 @@ void Game::update(float deltaTime) {
     bullets.remove_if(bulletRemover);
 }
 
+// Renderiza o jogador, as balas e o inimigo
 void Game::render() {
     const Color backgroundColor = { 0, 0, 255, 255 };
     const Color playerColor = { 0, 255, 0, 255 };
@@ -135,6 +143,7 @@ void Game::render() {
     graphicInterface->updateRender();
 }
 
+// Cria uma bala, tiro powwwww, powwww
 void Game::shootBullet() {
     Uint32 currentTime = SDL_GetTicks();
 	//cooldown entre tiros
