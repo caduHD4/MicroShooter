@@ -1,18 +1,16 @@
+#ifndef bullet_hpp
 #define bullet_hpp
+
 #include <stdio.h>
 #include <iostream>
 #include "SDL.h"
 #include "object.hpp"
-#pragma once
 
 class Bullet : public Object {
-
 public:
-	Bullet();
-	Bullet(Vector position);
-	void moveUp();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
-
+    Bullet();
+    Bullet(Vector position);
+    void move(float frameTime);  // Remover deltaX e deltaY
 };
+
+#endif

@@ -17,6 +17,7 @@ void handleInput(Game* game) {
             game->player.moveDown(game->frameTime);
         }
         if (keys[SDL_SCANCODE_Z]) {
+            // Implementar ação para a tecla Z, se necessário
         }
     }
 }

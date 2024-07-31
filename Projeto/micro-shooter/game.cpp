@@ -54,24 +54,25 @@ Game::Game() {
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_LEFT]) {
-            player.moveLeft(deltaTime);
+            player.move(-1.0f, 0.0f, deltaTime);
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
-            player.moveRight(deltaTime);
+            player.move(1.0f, 0.0f, deltaTime);
         }
         if (keys[SDL_SCANCODE_UP]) {
-            player.moveUp(deltaTime);
+            player.move(0.0f, -1.0f, deltaTime);
         }
         if (keys[SDL_SCANCODE_DOWN]) {
-            player.moveDown(deltaTime);
+            player.move(0.0f, 1.0f, deltaTime);
         }
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
         }
     }
 
+    // Atualiza a posição das balas
     for (auto& bullet : bullets) {
-        bullet->moveUp();
+        bullet->move(deltaTime);  // Move a bala usando a nova lógica
     }
 
 	// Colisão do jogador com o inimigo
@@ -149,7 +150,7 @@ void Game::shootBullet() {
 	//cooldown entre tiros
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player.getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player.getWidth() / 81, -34));
+        Bullet* newBullet = new Bullet(playerPos + Vector(player.getWidth() / 3, 0));
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
     }

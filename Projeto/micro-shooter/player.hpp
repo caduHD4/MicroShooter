@@ -12,11 +12,7 @@ private:
 
 public:
     Player();
-    void moveUp(float frameTime);
-    void moveDown(float frameTime);
-    void moveLeft(float frameTime);
-    void moveRight(float frameTime);
-
+    void move(float deltaX, float deltaY, float frameTime);
     Rect& getRect();
     void setRect(const Rect& rect);
 };

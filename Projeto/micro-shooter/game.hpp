@@ -23,7 +23,7 @@ private:
     Uint32 frameStart;
     Uint32 frameTime;
     Uint32 lastShotTime;
-    Uint32 shotCooldown = 150; // Cooldown entre tiros
+    Uint32 shotCooldown = 100; // Cooldown entre tiros
 
 public:
     Game();
