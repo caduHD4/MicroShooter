@@ -8,7 +8,6 @@ Game::Game() {
     const Color backgroundColor = { 0, 0, 255, 255 };
     const Color playerColor = { 0, 255, 0, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
-    Rect playerRect = { Vector(300, 300), 40, 40 };
     //Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -54,16 +53,16 @@ Game::Game() {
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_LEFT]) {
-            player.move(-1.0f, 0.0f, deltaTime);
+			player.move(-1.0f, 0.0f, deltaTime); // Esquerda
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
-            player.move(1.0f, 0.0f, deltaTime);
+			player.move(1.0f, 0.0f, deltaTime); // Direita
         }
         if (keys[SDL_SCANCODE_UP]) {
-            player.move(0.0f, -1.0f, deltaTime);
+            player.move(0.0f, -1.0f, deltaTime); // Cima
         }
         if (keys[SDL_SCANCODE_DOWN]) {
-            player.move(0.0f, 1.0f, deltaTime);
+            player.move(0.0f, 1.0f, deltaTime); // Baixo
         }
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
@@ -72,7 +71,7 @@ void Game::update(float deltaTime) {
 
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
-        bullet->move(deltaTime);  // Move a bala usando a nova lógica
+        bullet->move(0.0f, 1.0f, deltaTime);
     }
 
 	// Colisão do jogador com o inimigo
@@ -130,7 +129,7 @@ void Game::render() {
 
     graphicInterface->clearRender(backgroundColor);
 
-    Rect playerRect = { player.getPosition(), 40, 40 };
+    Rect playerRect = { player.getPosition(), player.getWidth(), player.getHeight()};
     graphicInterface->drawRect(playerRect, playerColor);
 
     for (auto& bullet : bullets) {

@@ -7,10 +7,6 @@
 class Enemy : public Object {
 public:
     Enemy();
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
 };
 
 #endif

@@ -52,5 +52,6 @@ public:
         float newY = this->position.y + deltaY * speed.y * frameTime;
         this->position = Vector(newX, newY);
     }
+
 };
 #endif

@@ -10,7 +10,6 @@ class Bullet : public Object {
 public:
     Bullet();
     Bullet(Vector position);
-    void move(float frameTime);  // Remover deltaX e deltaY
 };
 
 #endif

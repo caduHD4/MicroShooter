@@ -7,6 +7,7 @@
 #include "player.hpp"
 #include "bullet.hpp"
 #include "enemy.hpp"
+#include "object.hpp"
 #include "graphic-implement-sdl.hpp"
 #include "event-implement-sdl.hpp"
 

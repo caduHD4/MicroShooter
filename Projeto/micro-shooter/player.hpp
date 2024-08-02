@@ -8,13 +8,12 @@
 class Player : public Object
 {
 private:
-    Rect rect;
+    // Rect rect;
 
 public:
     Player();
-    void move(float deltaX, float deltaY, float frameTime);
-    Rect& getRect();
-    void setRect(const Rect& rect);
+    // Rect& getRect();
+    // void setRect(const Rect& rect);
 };
 
 #endif
