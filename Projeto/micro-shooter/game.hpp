@@ -25,6 +25,9 @@ private:
     Uint32 frameTime;
     Uint32 lastShotTime;
     Uint32 shotCooldown = 100; // Cooldown entre tiros
+    Vector enemyDirection;
+    float enemySpeed;
+    float enemyTime = 0.0f;
 
 public:
     Game();
