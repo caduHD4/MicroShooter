@@ -47,10 +47,25 @@ public:
     }
 
     // Método para mover o objeto
-    void move(float deltaX, float deltaY, float frameTime) {
-        float newX = this->position.x + deltaX * speed.x * frameTime;
-        float newY = this->position.y + deltaY * speed.y * frameTime;
-        this->position = Vector(newX, newY);
+    virtual void move(float frameTime) {
+        this->position.x += this->speed.x * frameTime;
+        this->position.y += this->speed.y * frameTime;
+    }
+
+    void moveLeft(float frameTime) {
+        this->position.x -= this->speed.x * frameTime;
+    }
+
+    void moveRight(float frameTime) {
+        this->position.x += this->speed.x * frameTime;
+    }
+
+    void moveUp(float frameTime) {
+        this->position.y -= this->speed.y * frameTime;
+    }
+
+    void moveDown(float frameTime) {
+        this->position.y += this->speed.y * frameTime;
     }
 
 };

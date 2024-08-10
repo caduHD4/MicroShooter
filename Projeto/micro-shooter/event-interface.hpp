@@ -16,7 +16,7 @@ public:
 	{
 		return this->player;
 	}
-	void setPlayer(Player& player)
+	void setPlayer(Player& player) // copiando, n referenciando
 	{
 		this->player = player;
 	}

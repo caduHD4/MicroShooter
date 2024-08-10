@@ -14,7 +14,7 @@
 class Game {
 private:
     Player player;
-    Enemy enemy;
+    std::list<Enemy> enemies;
     std::list<Bullet*> bullets;
     GraphicImplementSdl* graphicInterface;
     EventImplementSdl* eventInterface;

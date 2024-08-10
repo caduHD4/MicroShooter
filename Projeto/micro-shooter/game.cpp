@@ -26,13 +26,12 @@ Game::Game() {
     // Delay da bala
     lastShotTime = 0;
 
-    // Spawna o inimigo a 200 pixels do jogador
-    Vector enemyPosition = player.getPosition() + Vector(0, -300);
-    enemy.setPosition(enemyPosition);
+    for (int i = 0; i < 5; ++i) { // Exemplo: 5 inimigos
+        Enemy enemy;
+        enemy.setPosition(Vector(100 * i, 100)); // Posiciona os inimigos
+        enemies.push_back(enemy);
+    }
 
-    // Inicializa a direção e velocidade do inimigo
-    enemyDirection = Vector(1.0f, 0.0f);
-    enemySpeed = 200.0f;
 
     // Looping principal do jogo
     while (eventInterface->getIsRunning()) {
@@ -50,26 +49,27 @@ Game::Game() {
             SDL_Delay(frameDelay - frameTime);
         }
         else {
-            // TODO: Tratar lag
+
         }
     }
 
     graphicInterface->cleanWindow();
 }
 
+
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_LEFT]) {
-            player.move(-1.0f, 0.0f, deltaTime); // Esquerda
+            player.moveLeft(deltaTime);
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
-            player.move(1.0f, 0.0f, deltaTime); // Direita
+            player.moveRight(deltaTime);
         }
         if (keys[SDL_SCANCODE_UP]) {
-            player.move(0.0f, -1.0f, deltaTime); // Cima
+            player.moveUp(deltaTime);
         }
         if (keys[SDL_SCANCODE_DOWN]) {
-            player.move(0.0f, 1.0f, deltaTime); // Baixo
+            player.moveDown(deltaTime);
         }
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
@@ -78,60 +78,39 @@ void Game::update(float deltaTime) {
 
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
-        bullet->move(0.0f, 1.0f, deltaTime);
+        bullet->move(deltaTime);
     }
 
-    // Atualiza a posição do inimigo com movimento sinusoidal
-    enemyTime += deltaTime;
-    Vector enemyPos = enemy.getPosition();
-    enemyPos.x = 360 + 200 * sin(enemyTime * 2.0f); // Movimento sinusoidal horizontal
-    enemyPos.y += enemySpeed * deltaTime; // Movimento vertical constante
 
-    // Verifica se o inimigo atingiu as bordas da tela e inverte a direção
-    if (enemyPos.y <= 0 || enemyPos.y + enemy.getHeight() >= SCREEN_HEIGHT) {
-        enemySpeed *= -1; // Inverte a direção vertical
-    }
+    for (auto& enemy : enemies) {
+        // Lógica de movimentação do inimigo
+        enemy.move(deltaTime);
 
-    enemy.setPosition(enemyPos);
-
-    // Colisão do jogador com o inimigo
-    if (player.getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
-        player.getPosition().x + player.getWidth() > enemy.getPosition().x &&
-        player.getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
-        player.getPosition().y + player.getHeight() > enemy.getPosition().y) {
-        std::cout << "Colisão com o jogador!" << std::endl;
-
-        enemy.setLife(enemy.getLife() - 1);
-    }
-
-    // Colisão da bala com o inimigo
-    bool collisionDetected = false;
-    for (auto& bullet : bullets) {
-        if (bullet->getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
-            bullet->getPosition().x + bullet->getWidth() > enemy.getPosition().x &&
-            bullet->getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
-            bullet->getPosition().y + bullet->getHeight() > enemy.getPosition().y) {
-            if (!collisionDetected) {
+        // Lógica de colisão com balas
+        for (auto bullet : bullets) {
+            if (bullet->getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
+                bullet->getPosition().x + bullet->getWidth() > enemy.getPosition().x &&
+                bullet->getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
+                bullet->getPosition().y + bullet->getHeight() > enemy.getPosition().y) {
                 std::cout << "Colisão com a bala!" << std::endl;
-                collisionDetected = true;
+                enemy.setLife(enemy.getLife() - 1);
+                if (enemy.getLife() <= 0) {
+                    std::cout << "Inimigo destruído!" << std::endl;
+                    enemy.setDead(true); 
+                }
+                bullet->setLife(0);
             }
-
-            enemy.setLife(enemy.getLife() - 1);
         }
     }
 
-    // Remove o inimigo se a vida chegar a 0
-    if (enemy.getLife() <= 0) {
-        static bool enemyDestroyed = false;
-        if (!enemyDestroyed) {
-            std::cout << "Inimigo destruído!" << std::endl;
-            enemyDestroyed = true;
-        }
-        // Remove o inimigo da tela
-        enemy.setPosition(Vector(-100, -100));
-    }
+    auto enemyRemover = [](Enemy& e) -> bool {
+        return e.isDead();
+        };
+    enemies.remove_if(enemyRemover);
+
+    // Remover balas fora da tela e quando a vida da bala chega a 0
     auto bulletRemover = [](Bullet* b) -> bool {
-        if (b->getPosition().y < 0) {
+        if (b->getPosition().y < 0 || b->getLife() <= 0) {
             delete b;
             return true;
         }
@@ -156,9 +135,11 @@ void Game::render() {
         graphicInterface->drawRect(bulletRect, bulletColor);
     }
 
-    Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
-    graphicInterface->drawRect(enemyRect, enemyColor);
-    enemy.drawHealthBar(graphicInterface);
+    for (auto& enemy : enemies) {
+        Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
+        graphicInterface->drawRect(enemyRect, enemyColor);
+        enemy.drawHealthBar(graphicInterface); // Desenhar a barra de vida do inimigo
+    }
 
     graphicInterface->updateRender();
 }

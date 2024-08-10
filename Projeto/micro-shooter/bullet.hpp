@@ -8,7 +8,6 @@
 
 class Bullet : public Object {
 public:
-    Bullet();
     Bullet(Vector position);
 };
 
