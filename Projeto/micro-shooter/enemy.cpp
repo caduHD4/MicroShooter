@@ -27,13 +27,13 @@ void Enemy::move(float frameTime) {
     // Verifica se o inimigo atingiu os limites da tela
     if (this->position.x <= 0 || this->position.x + this->width >= 720) {
         this->direction *= -1; // Inverte a direção
-        this->position.x = std::max(0.0f, std::min(this->position.x, 720.0f - this->width)); // Mantém dentro dos limites
+        this->position.x = std::max(0.0f, std::min(this->position.x, 720.0f - this->width));
     }
 
     // Movimento vertical constante
     this->position.y += this->speed.y * frameTime;
-    if (this->position.y + this->height >= 720) {
-        this->position.y = 720.0f - this->height; // Mantém dentro dos limites
+    if (this->position.y + this->height >= 200) {
+        this->position.y = 200.0f - this->height; // Mantém dentro dos limites
     }
 }
 
@@ -43,23 +43,19 @@ void Enemy::drawHealthBar(GraphicImplementSdl* graphicInterface) {
     float healthPercentage = static_cast<float>(this->getLife()) / 3.0f;
     float currentHealthBarWidth = healthBarWidth * healthPercentage;
 
-    // Garante que a largura da barra de vida não exceda a largura máxima
     if (currentHealthBarWidth > healthBarWidth) {
         currentHealthBarWidth = healthBarWidth;
     }
 
-    // Define a posição da barra de vida acima do inimigo
     Vector healthBarPosition = this->getPosition() + Vector(0, -10);
 
-    // Cria os retângulos para o fundo e a frente da barra de vida
     Rect healthBarBackground = { healthBarPosition, healthBarWidth, healthBarHeight };
     Rect healthBarForeground = { healthBarPosition, currentHealthBarWidth, healthBarHeight };
 
-    // Define as cores para o fundo e a frente da barra de vida
-    Color backgroundColor = { 255, 0, 0, 255 }; // Vermelho para o fundo
-    Color foregroundColor = { 0, 255, 0, 255 }; // Verde para a vida atual
+    Color backgroundColor = { 255, 0, 0, 255 };
+    Color foregroundColor = { 0, 255, 0, 255 }; 
 
-    // Desenha os retângulos da barra de vida
+
     graphicInterface->drawRect(healthBarBackground, backgroundColor);
     graphicInterface->drawRect(healthBarForeground, foregroundColor);
 }

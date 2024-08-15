@@ -4,9 +4,6 @@
 #include "bullet.hpp"
 #include <cmath>
 
-const int SCREEN_WIDTH = 720;
-const int SCREEN_HEIGHT = 720;
-
 Game::Game() {
     // fundo, tela, jogador e balas
     const Color backgroundColor = { 0, 0, 255, 255 };
@@ -26,9 +23,9 @@ Game::Game() {
     // Delay da bala
     lastShotTime = 0;
 
-    for (int i = 0; i < 5; ++i) { // Exemplo: 5 inimigos
+    for (int i = 0; i < 5; ++i) { //5 inimigos
         Enemy enemy;
-        enemy.setPosition(Vector(100 * i, 100)); // Posiciona os inimigos
+        enemy.setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
         enemies.push_back(enemy);
     }
 
@@ -92,10 +89,10 @@ void Game::update(float deltaTime) {
                 bullet->getPosition().x + bullet->getWidth() > enemy.getPosition().x &&
                 bullet->getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
                 bullet->getPosition().y + bullet->getHeight() > enemy.getPosition().y) {
-                std::cout << "Colisão com a bala!" << std::endl;
+                std::cout << "Colisao com a bala!" << std::endl;
                 enemy.setLife(enemy.getLife() - 1);
                 if (enemy.getLife() <= 0) {
-                    std::cout << "Inimigo destruído!" << std::endl;
+                    std::cout << "Inimigo destruido!" << std::endl;
                     enemy.setDead(true); 
                 }
                 bullet->setLife(0);
@@ -138,7 +135,7 @@ void Game::render() {
     for (auto& enemy : enemies) {
         Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
         graphicInterface->drawRect(enemyRect, enemyColor);
-        enemy.drawHealthBar(graphicInterface); // Desenhar a barra de vida do inimigo
+        enemy.drawHealthBar(graphicInterface);
     }
 
     graphicInterface->updateRender();
