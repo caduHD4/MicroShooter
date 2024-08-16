@@ -1,7 +1,5 @@
-﻿  enemy.cpp
-  game.cpp
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(28,47): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(28,38): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(46,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
-  Gerando Código...
-  micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe
+﻿  game.cpp
+E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(32,47): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
+E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(32,38): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
+E:\Faculdade\MicroShooter\Projeto\micro-shooter\game.cpp(50,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
+  micro-shooter.vcxproj -> E:\Faculdade\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

@@ -2,9 +2,11 @@
 #include "graphic-implement-sdl.hpp"
 #include "event-implement-sdl.hpp"
 #include "bullet.hpp"
+#include "sdl_mixer.h"
 #include <cmath>
 
 Game::Game() {
+    int init = Mix_Init(0);
     // fundo, tela, jogador e balas
     const Color backgroundColor = { 0, 0, 255, 255 };
     const Color playerColor = { 0, 255, 0, 255 };
@@ -22,6 +24,8 @@ Game::Game() {
     Uint32 lastUpdateTick = SDL_GetTicks();
     // Delay da bala
     lastShotTime = 0;
+
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
     for (int i = 0; i < 5; ++i) { //5 inimigos
         Enemy enemy;
@@ -144,9 +148,11 @@ void Game::render() {
 void Game::shootBullet() {
     Uint32 currentTime = SDL_GetTicks();
     // cooldown entre tiros
+    Mix_Chunk* shootEffect = Mix_LoadWAV("audio/shoot.wav");
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player.getPosition();
         Bullet* newBullet = new Bullet(playerPos + Vector(player.getWidth() / 3, 0));
+        Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
     }
