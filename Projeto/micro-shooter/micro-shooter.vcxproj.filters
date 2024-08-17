@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ports">
+      <UniqueIdentifier>{cba3bf1c-4329-4170-878d-473ae46e38ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{e28a5c73-a2cd-46e0-b0c6-ed3cfe58f103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="adapters">
+      <UniqueIdentifier>{75fb1783-2331-4571-b2b6-60c5e16791b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\src">
+      <UniqueIdentifier>{b3f9f201-1b35-41f4-bdb3-40a92a4485c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\include">
+      <UniqueIdentifier>{42461048-0ff1-47ae-82d5-3aef374423d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="adapters\include">
+      <UniqueIdentifier>{0dabf94c-d1ce-4cb1-a267-4677bd4576f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="adapters\src">
+      <UniqueIdentifier>{1dce6f17-67a3-437c-bf0c-1a9a36b8980c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ports\include">
+      <UniqueIdentifier>{002060fa-d973-4dba-838d-12bab21a79d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="graphic-implement-sdl.cpp">
+      <Filter>adapters\src</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="event-implement-sdl.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="object.hpp">
+      <Filter>core\include</Filter>
+    </ClCompile>
+    <ClCompile Include="player.hpp">
+      <Filter>core\include</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="graphic-interface.hpp">
+      <Filter>ports\include</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic-implement-sdl.hpp">
+      <Filter>adapters\include</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="event-implement-sdl.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="event-interface.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
