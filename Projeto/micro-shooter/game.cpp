@@ -97,6 +97,8 @@ void Game::update(float deltaTime) {
                 enemy.setLife(enemy.getLife() - 1);
                 if (enemy.getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
+                    Mix_Chunk* enemyFaintedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
+                    Mix_PlayChannel(-1, enemyFaintedEffect, 0);
                     enemy.setDead(true); 
                 }
                 bullet->setLife(0);

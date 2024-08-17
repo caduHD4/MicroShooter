@@ -50,8 +50,7 @@
               "RelativeToolTip": "micro-shooter\\bullet.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-16T23:35:07.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-16T23:35:07.085Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "micro-shooter\\bullet.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-16T23:35:02.435Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-16T23:35:02.435Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "micro-shooter\\player.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-13T00:30:16.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-13T00:30:16.574Z"
             },
             {
               "$type": "Document",
@@ -89,8 +86,7 @@
               "RelativeToolTip": "micro-shooter\\game.hpp",
               "ViewState": "AQIAABYAAAAAAAAAAAAvwCMAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-11T00:27:21.573Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T00:27:21.573Z"
             },
             {
               "$type": "Document",
@@ -100,7 +96,7 @@
               "RelativeDocumentMoniker": "micro-shooter\\game.cpp",
               "ToolTip": "E:\\Faculdade\\MicroShooter\\Projeto\\micro-shooter\\game.cpp",
               "RelativeToolTip": "micro-shooter\\game.cpp",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAvwJoAAAAqAAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAvwGMAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-10T22:45:45.403Z",
               "EditorCaption": ""
@@ -115,8 +111,7 @@
               "RelativeToolTip": "micro-shooter\\main.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-16T22:57:12.123Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-16T22:57:12.123Z"
             }
           ]
         }
