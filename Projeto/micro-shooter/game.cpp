@@ -137,6 +137,7 @@ void Game::render() {
 
     graphicInterface->clearRender(backgroundColor);
 
+	//renderiza o movimento do jogador, agora será com o player->render
     //Rect playerRect = { player.getPosition(), player.getWidth(), player.getHeight() };
     //graphicInterface->drawRect(playerRect, playerColor);
 
