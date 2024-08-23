@@ -13,7 +13,7 @@
 
 class Game {
 private:
-    Player player;
+    Player* player;
     std::list<Enemy> enemies;
     std::list<Bullet*> bullets;
     GraphicImplementSdl* graphicInterface;
@@ -31,6 +31,7 @@ private:
 
 public:
     Game();
+    ~Game();
     void update(float deltaTime);
     void render();
     void shootBullet();

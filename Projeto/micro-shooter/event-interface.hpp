@@ -7,16 +7,18 @@
 class EventInterface
 {
 private:
-	Player player; // Player duplicando, declarar como ponteiro
+	Player* player; // Player duplicando, declarar como ponteiro
 	bool isRunning;
 
 public:
+	EventInterface() : player(nullptr), isRunning(false) {}
 	virtual void handleEvents() = 0;
-	Player& getPlayer()
+
+	Player* getPlayer()
 	{
 		return this->player;
 	}
-	void setPlayer(Player& player) // ele copiando, n referenciando!
+	void setPlayer(Player* player) // ele copiando, n referenciando!
 	{
 		this->player = player;
 	}

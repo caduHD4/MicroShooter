@@ -26,25 +26,25 @@ void EventImplementSdl::handleInputEvents(SDL_Event& event)
         switch (event.key.keysym.sym) {
         case SDLK_LEFT: {
             printf("Tecla LEFT pressionada\n");
-            this->getPlayer().moveLeft(this->getFrameTime());
+            getPlayer()->moveLeft(this->getFrameTime());
             break;
         }
 
         case SDLK_RIGHT: {
             printf("Tecla RIGHT pressionada\n");
-            this->getPlayer().moveRight(this->getFrameTime());
+            getPlayer()->moveRight(this->getFrameTime());
             break;
         }
 
         case SDLK_UP: {
             printf("Tecla UP pressionada\n");
-            this->getPlayer().moveUp(this->getFrameTime());
+            getPlayer()->moveUp(this->getFrameTime());
             break;
         }
 
         case SDLK_DOWN: {
             printf("Tecla DOWN pressionada\n");
-            this->getPlayer().moveDown(this->getFrameTime());
+            getPlayer()->moveDown(this->getFrameTime());
             break;
         }
 

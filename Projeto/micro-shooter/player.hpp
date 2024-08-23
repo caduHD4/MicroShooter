@@ -4,17 +4,18 @@
 #include <iostream>
 #include "object.hpp"
 #include "graphic-implement-sdl.hpp"
+#include "sprite.hpp"
 
 class Player : public Object
 {
 private:
-    // Rect rect;
+    Sprite* sprite;
 
 public:
-    Player();
-    // Rect& getRect();
-    // void setRect(const Rect& rect);
+    Player(SDL_Renderer* renderer);
+    ~Player();
+    void update(float deltaTime);
+    void render(SDL_Renderer* renderer);
 };
 
 #endif
-
