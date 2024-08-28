@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "game.hpp"
 
 Player::Player(SDL_Renderer* renderer)
 {
@@ -10,7 +11,7 @@ Player::Player(SDL_Renderer* renderer)
     this->setHeight(40.0);
     this->setLife(3);
 
-    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 40, 6, 0.2f); // Ajuste os parâmetros conforme necessário
+    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 40, 6, 0.15f); // Ajuste os parï¿½metros conforme necessï¿½rio
 }
 
 Player::~Player() {

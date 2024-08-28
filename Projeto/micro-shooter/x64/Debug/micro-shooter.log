@@ -1,8 +1,2 @@
-﻿  game.cpp
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(33,47): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(33,38): warning C4244: 'argumento': conversão de 'int' para 'const float', possível perda de dados
-D:\git\MicroShooter\Projeto\micro-shooter\game.cpp(51,34): warning C4244: 'argumento': conversão de 'float' para 'Uint32', possível perda de dados
-  player.cpp
-  player.hpp
-  Gerando Código...
-  micro-shooter.vcxproj -> D:\git\MicroShooter\Projeto\x64\Debug\micro-shooter.exe
+﻿  event-implement-sdl.cpp
+  micro-shooter.vcxproj -> C:\MicroShooter\Projeto\x64\Debug\micro-shooter.exe

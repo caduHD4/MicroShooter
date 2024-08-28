@@ -18,32 +18,32 @@ void EventImplementSdl::handleEvents()
 	}
 }
 
-
 void EventImplementSdl::handleInputEvents(SDL_Event& event)
 {
     switch (event.type) {
     case SDL_KEYDOWN: {
         switch (event.key.keysym.sym) {
+        
         case SDLK_LEFT: {
-            printf("Tecla LEFT pressionada\n");
+            printf("Tecla LEFT\n");
             getPlayer()->moveLeft(this->getFrameTime());
             break;
         }
 
-        case SDLK_RIGHT: {
-            printf("Tecla RIGHT pressionada\n");
+        case SDLK_RIGHT:{
+            printf("Tecla RIGHT\n");
             getPlayer()->moveRight(this->getFrameTime());
             break;
         }
 
         case SDLK_UP: {
-            printf("Tecla UP pressionada\n");
+            printf("Tecla UP\n");
             getPlayer()->moveUp(this->getFrameTime());
             break;
         }
 
         case SDLK_DOWN: {
-            printf("Tecla DOWN pressionada\n");
+            printf("Tecla DOWN\n");
             getPlayer()->moveDown(this->getFrameTime());
             break;
         }
@@ -56,7 +56,7 @@ void EventImplementSdl::handleInputEvents(SDL_Event& event)
 
         case SDLK_z: {
             printf("Tecla Z pressionada\n");
-            // Lógica para lidar com Z, se necessário
+            // Tiro do jogador
             break;
         }
 
@@ -67,3 +67,4 @@ void EventImplementSdl::handleInputEvents(SDL_Event& event)
     }
     }
 }
+

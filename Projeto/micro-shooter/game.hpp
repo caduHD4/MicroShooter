@@ -31,7 +31,6 @@ private:
 
 public:
     Game();
-    ~Game();
     void update(float deltaTime);
     void render();
     void shootBullet();

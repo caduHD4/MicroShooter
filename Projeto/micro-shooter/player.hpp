@@ -4,12 +4,11 @@
 #include <iostream>
 #include "object.hpp"
 #include "graphic-implement-sdl.hpp"
-#include "sprite.hpp"
 
 class Player : public Object
 {
 private:
-    Sprite* sprite;
+    const Uint8* keys;
 
 public:
     Player(SDL_Renderer* renderer);

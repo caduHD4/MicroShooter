@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "math-vector.h"
+#include "sprite.hpp"
 
 using Vector = Mylib::Math::Vector<float, 2>;
 class Object {
@@ -13,6 +14,7 @@ protected:
     float width;
     Vector speed;
     Vector position;
+    Sprite* sprite;
 
 public:
     Vector getSpeed() {
@@ -54,18 +56,22 @@ public:
 
     void moveLeft(float frameTime) {
         this->position.x -= this->speed.x * frameTime;
+        sprite->update(frameTime);
     }
 
     void moveRight(float frameTime) {
         this->position.x += this->speed.x * frameTime;
+        sprite->update(frameTime);
     }
 
     void moveUp(float frameTime) {
         this->position.y -= this->speed.y * frameTime;
+        sprite->update(frameTime);
     }
 
     void moveDown(float frameTime) {
         this->position.y += this->speed.y * frameTime;
+        sprite->update(frameTime);
     }
 
 };
