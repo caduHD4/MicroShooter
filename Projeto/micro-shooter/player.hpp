@@ -8,13 +8,13 @@
 class Player : public Object
 {
 private:
-    // Rect rect;
+    const Uint8* keys;
 
 public:
-    Player();
-    // Rect& getRect();
-    // void setRect(const Rect& rect);
+    Player(SDL_Renderer* renderer);
+    ~Player();
+    void update(float deltaTime);
+    void render(SDL_Renderer* renderer);
 };
 
 #endif
-

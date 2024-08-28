@@ -9,11 +9,12 @@ Game::Game() {
     int init = Mix_Init(0);
     // fundo, tela, jogador e balas
     const Color backgroundColor = { 0, 0, 255, 255 };
-    const Color playerColor = { 0, 255, 0, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     // Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
+    player = new Player(graphicInterface->getSdlRenderer());
+	eventInterface->setPlayer(player);
     eventInterface->setIsRunning(true);
     // Lida com o framerate
     FPS = 60.0f;
@@ -24,8 +25,23 @@ Game::Game() {
     Uint32 lastUpdateTick = SDL_GetTicks();
     // Delay da bala
     lastShotTime = 0;
+    lastSpawnTime = 0;
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_AllocateChannels(16);
+
+    shootEffect = Mix_LoadWAV("audio/shoot.wav");
+    enemyDestroyedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
+
+
+    // Carrega a música de fundo
+    Mix_Music* backgroundMusic = Mix_LoadMUS("audio/theme.wav");
+    if (backgroundMusic == nullptr) {
+        std::cerr << "Erro ao carregar a música de fundo: " << Mix_GetError() << std::endl;
+    }
+    else {
+        Mix_PlayMusic(backgroundMusic, -1);
+    }
 
     for (int i = 0; i < 5; ++i) { //5 inimigos
         Enemy enemy;
@@ -57,25 +73,37 @@ Game::Game() {
     graphicInterface->cleanWindow();
 }
 
+Game::~Game() {
+    Mix_FreeChunk(shootEffect); // Libera a memória
+    Mix_CloseAudio();
+    delete graphicInterface;
+    delete eventInterface;
+    delete player;
+}
 
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
-        if (keys[SDL_SCANCODE_LEFT]) {
-            player.moveLeft(deltaTime);
-        }
-        if (keys[SDL_SCANCODE_RIGHT]) {
-            player.moveRight(deltaTime);
-        }
-        if (keys[SDL_SCANCODE_UP]) {
-            player.moveUp(deltaTime);
-        }
-        if (keys[SDL_SCANCODE_DOWN]) {
-            player.moveDown(deltaTime);
-        }
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
         }
+        if (keys[SDL_SCANCODE_X]) {
+            spawnEnemies();
+        }
+        if (keys[SDL_SCANCODE_LEFT]) {
+            player->moveLeft(deltaTime);
+        }
+        if (keys[SDL_SCANCODE_RIGHT]) {
+            player->moveRight(deltaTime);
+        }
+        if (keys[SDL_SCANCODE_UP]) {
+            player->moveUp(deltaTime);
+        }
+        if (keys[SDL_SCANCODE_DOWN]) {
+            player->moveDown(deltaTime);
+        }
     }
+
+    player->update(deltaTime);
 
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
@@ -97,6 +125,7 @@ void Game::update(float deltaTime) {
                 enemy.setLife(enemy.getLife() - 1);
                 if (enemy.getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
+                    int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
                     enemy.setDead(true); 
                 }
                 bullet->setLife(0);
@@ -122,14 +151,12 @@ void Game::update(float deltaTime) {
 
 void Game::render() {
     const Color backgroundColor = { 0, 0, 255, 255 };
-    const Color playerColor = { 0, 255, 0, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     const Color enemyColor = { 255, 0, 0, 255 };
 
     graphicInterface->clearRender(backgroundColor);
 
-    Rect playerRect = { player.getPosition(), player.getWidth(), player.getHeight() };
-    graphicInterface->drawRect(playerRect, playerColor);
+    player->render(graphicInterface->getSdlRenderer());
 
     for (auto& bullet : bullets) {
         Rect bulletRect = { bullet->getPosition(), bullet->getWidth(), bullet->getHeight() };
@@ -148,12 +175,24 @@ void Game::render() {
 void Game::shootBullet() {
     Uint32 currentTime = SDL_GetTicks();
     // cooldown entre tiros
-    Mix_Chunk* shootEffect = Mix_LoadWAV("audio/shoot.wav");
     if (currentTime - lastShotTime >= shotCooldown) {
-        Vector playerPos = player.getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player.getWidth() / 3, 0));
-        Mix_PlayChannel(-1, shootEffect, 0);
+        Vector playerPos = player->getPosition();
+        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, 0));
+        int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
+    }
+}
+
+//spawn de inimigos para testes
+void Game::spawnEnemies() {
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime - lastSpawnTime >= enemiesCooldown) {
+        lastSpawnTime = currentTime;
+        for (int i = 0; i < 5; ++i) {
+            Enemy enemy;
+            enemy.setPosition(Vector(100 * i, 100 + 50 * i));
+            enemies.push_back(enemy);
+        }
     }
 }

@@ -52,6 +52,9 @@
       <Filter>core\include</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sprite.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphic-interface.hpp">
@@ -73,6 +76,9 @@
       <Filter>core\include</Filter>
     </ClInclude>
     <ClInclude Include="game.hpp">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
       <Filter>core\include</Filter>
     </ClInclude>
   </ItemGroup>
