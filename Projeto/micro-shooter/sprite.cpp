@@ -24,8 +24,10 @@ void Sprite::update(float deltaTime) {
     }
 }
 
-void Sprite::render(SDL_Renderer* renderer, int x, int y) {
+void Sprite::render(SDL_Renderer* renderer, int x, int y, int width, int height) {
     destRect.x = x;
     destRect.y = y;
+    destRect.w = width;
+    destRect.h = height;
     SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
 }
