@@ -60,6 +60,12 @@ void EventImplementSdl::handleInputEvents(SDL_Event& event)
             break;
         }
 
+        case SDLK_x: {
+            printf("Tecla X pressionada\n");
+            // Tiro do jogador
+            break;
+        }
+
         default:
             break;
         }

@@ -25,14 +25,14 @@ Game::Game() {
     Uint32 lastUpdateTick = SDL_GetTicks();
     // Delay da bala
     lastShotTime = 0;
+    lastSpawnTime = 0;
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_AllocateChannels(16);
 
-    for (int i = 0; i < 5; ++i) { //5 inimigos
-        Enemy enemy;
-        enemy.setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
-        enemies.push_back(enemy);
-    }
+    shootEffect = Mix_LoadWAV("audio/shoot.wav");
+    enemyDestroyedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
+
 
     // Carrega a música de fundo
     Mix_Music* backgroundMusic = Mix_LoadMUS("audio/theme.wav");
@@ -40,7 +40,6 @@ Game::Game() {
         std::cerr << "Erro ao carregar a música de fundo: " << Mix_GetError() << std::endl;
     }
     else {
-        // Toca a música de fundo em looping
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
@@ -74,11 +73,21 @@ Game::Game() {
     graphicInterface->cleanWindow();
 }
 
+Game::~Game() {
+    Mix_FreeChunk(shootEffect); // Libera a memória
+    Mix_CloseAudio();
+    delete graphicInterface;
+    delete eventInterface;
+    delete player;
+}
 
 void Game::update(float deltaTime) {
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
+        }
+        if (keys[SDL_SCANCODE_X]) {
+            spawnEnemies();
         }
         if (keys[SDL_SCANCODE_LEFT]) {
             player->moveLeft(deltaTime);
@@ -116,8 +125,7 @@ void Game::update(float deltaTime) {
                 enemy.setLife(enemy.getLife() - 1);
                 if (enemy.getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
-                    Mix_Chunk* enemyFaintedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
-                    Mix_PlayChannel(-1, enemyFaintedEffect, 0);
+                    int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
                     enemy.setDead(true); 
                 }
                 bullet->setLife(0);
@@ -148,10 +156,6 @@ void Game::render() {
 
     graphicInterface->clearRender(backgroundColor);
 
-    //Movimentação quando era um quadrado:
-    //Rect playerRect = { player.getPosition(), player.getWidth(), player.getHeight() };
-    //graphicInterface->drawRect(playerRect, playerColor);
-
     player->render(graphicInterface->getSdlRenderer());
 
     for (auto& bullet : bullets) {
@@ -171,12 +175,24 @@ void Game::render() {
 void Game::shootBullet() {
     Uint32 currentTime = SDL_GetTicks();
     // cooldown entre tiros
-    Mix_Chunk* shootEffect = Mix_LoadWAV("audio/shoot.wav");
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player->getPosition();
         Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, 0));
-        Mix_PlayChannel(-1, shootEffect, 0);
+        int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
+    }
+}
+
+//spawn de inimigos para testes
+void Game::spawnEnemies() {
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime - lastSpawnTime >= enemiesCooldown) {
+        lastSpawnTime = currentTime;
+        for (int i = 0; i < 5; ++i) {
+            Enemy enemy;
+            enemy.setPosition(Vector(100 * i, 100 + 50 * i));
+            enemies.push_back(enemy);
+        }
     }
 }
