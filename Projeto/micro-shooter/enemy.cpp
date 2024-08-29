@@ -37,25 +37,12 @@ void Enemy::move(float frameTime) {
     }
 }
 
-void Enemy::drawHealthBar(GraphicImplementSdl* graphicInterface) {
-    float healthBarWidth = this->getWidth();
-    float healthBarHeight = 5.0f;
-    float healthPercentage = static_cast<float>(this->getLife()) / 3.0f;
-    float currentHealthBarWidth = healthBarWidth * healthPercentage;
-
-    if (currentHealthBarWidth > healthBarWidth) {
-        currentHealthBarWidth = healthBarWidth;
-    }
-
-    Vector healthBarPosition = this->getPosition() + Vector(0, -10);
-
-    Rect healthBarBackground = { healthBarPosition, healthBarWidth, healthBarHeight };
-    Rect healthBarForeground = { healthBarPosition, currentHealthBarWidth, healthBarHeight };
-
-    Color backgroundColor = { 255, 0, 0, 255 };
-    Color foregroundColor = { 0, 255, 0, 255 }; 
-
-
-    graphicInterface->drawRect(healthBarBackground, backgroundColor);
-    graphicInterface->drawRect(healthBarForeground, foregroundColor);
+void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
+    
+    StatusBar healthBar = StatusBar(StatusBarInitialization{
+        .width = 40.0, .backgroundColor = { 255, 0, 0, 255 }, .foregroundColor = { 0, 255, 0, 255 },
+        .position = this->getPosition() + Vector(0, -10)
+    });
+    healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    healthBar.drawStatusBar(graphicInterface);
 }

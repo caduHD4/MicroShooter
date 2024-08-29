@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\ProjetosGit\my-lib\include;C:\MicroShooter\Projeto\SDL2-2.30.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Faculdade\my-lib\include;E:\Faculdade\MicroShooter\Projeto\SDL2-2.30.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\ProjetosGit\my-lib\src;C:\MicroShooter\Projeto\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Faculdade\my-lib\src;E:\Faculdade\MicroShooter\Projeto\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,6 +141,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player.hpp" />
     <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="status-bar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.hpp" />

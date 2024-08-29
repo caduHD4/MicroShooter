@@ -8,4 +8,3 @@ Bullet::Bullet(Vector position) {
     this->setHeight(12);
     this->setLife(1);
 }
-

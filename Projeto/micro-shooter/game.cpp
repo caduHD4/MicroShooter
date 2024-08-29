@@ -157,6 +157,8 @@ void Game::render() {
     graphicInterface->clearRender(backgroundColor);
 
     player->render(graphicInterface->getSdlRenderer());
+    player->createHealthBar(graphicInterface);
+    player->createEnergyBar(graphicInterface);
 
     for (auto& bullet : bullets) {
         Rect bulletRect = { bullet->getPosition(), bullet->getWidth(), bullet->getHeight() };
@@ -166,7 +168,7 @@ void Game::render() {
     for (auto& enemy : enemies) {
         Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
         graphicInterface->drawRect(enemyRect, enemyColor);
-        enemy.drawHealthBar(graphicInterface);
+        enemy.createHealthBar(graphicInterface);
     }
 
     graphicInterface->updateRender();
