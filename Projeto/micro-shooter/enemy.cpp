@@ -11,7 +11,7 @@ Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
     this->setLife(3);
     this->direction = 1;
 
-    sprite = new Sprite("sprite/enemySprite.png", renderer, 32, 40, 4, 0.15f);
+    sprite = new Sprite("sprite/enemySprite.png", renderer, 32, 32, 4, 0.15f);
 }
 
 Enemy::~Enemy() {

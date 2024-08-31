@@ -32,6 +32,7 @@ private:
     float enemyTime = 0.0f;
     Mix_Chunk* shootEffect;
     Mix_Chunk* enemyDestroyedEffect;
+    bool isFrozen;
 
 public:
     Game();

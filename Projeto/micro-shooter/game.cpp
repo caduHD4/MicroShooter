@@ -5,11 +5,8 @@
 #include "sdl_mixer.h"
 #include <cmath>
 
-Game::Game() {
+Game::Game() : isFrozen(false) {
     int init = Mix_Init(0);
-    // fundo, tela, jogador e balas
-    const Color backgroundColor = { 0, 0, 255, 255 };
-    const Color bulletColor = { 255, 255, 255, 255 };
     // Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -82,6 +79,11 @@ Game::~Game() {
 }
 
 void Game::update(float deltaTime) {
+
+    if (isFrozen) {
+        return; 
+    }
+
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
@@ -135,7 +137,21 @@ void Game::update(float deltaTime) {
                 bullet->setLife(0);
             }
         }
+
+        if (player->getPosition().x < enemy->getPosition().x + enemy->getWidth() &&
+            player->getPosition().x + player->getWidth() > enemy->getPosition().x &&
+            player->getPosition().y < enemy->getPosition().y + enemy->getHeight() &&
+            player->getPosition().y + player->getHeight() > enemy->getPosition().y) {
+            std::cout << "Colisao com o inimigo!" << std::endl;
+            player->setLife(player->getLife() - 1);
+            if (player->getLife() <= 0) {
+                std::cout << "Player destruido!" << std::endl;
+                player->setDead(true);
+                isFrozen = true;
+            }
+        }
     }
+
 
     enemies.remove_if([](Enemy* enemy) {
         if (enemy->isDead()) {
@@ -154,20 +170,24 @@ void Game::update(float deltaTime) {
         return false;
         };
     bullets.remove_if(bulletRemover);
+
 }
 
 void Game::render() {
-    const Color backgroundColor = { 0, 0, 255, 255 };
+    Color backgroundColor = { 0, 0, 255, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     const Color enemyColor = { 255, 0, 0, 255 };
+
+    if (isFrozen) {
+        backgroundColor = { 255, 0, 0, 255 }; // Muda a cor de fundo para vermelho
+    }
 
     graphicInterface->clearRender(backgroundColor);
 
     player->render(graphicInterface->getSdlRenderer());
 
     for (auto& bullet : bullets) {
-        Rect bulletRect = { bullet->getPosition(), bullet->getWidth(), bullet->getHeight() };
-        graphicInterface->drawRect(bulletRect, bulletColor);
+        bullet->render(graphicInterface->getSdlRenderer());
     }
 
     for (auto& enemy : enemies) {
@@ -183,7 +203,7 @@ void Game::shootBullet() {
     // cooldown entre tiros
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player->getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 2.5, 0));
+        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 55, -30), graphicInterface->getSdlRenderer());
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
