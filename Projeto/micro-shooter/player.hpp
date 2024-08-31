@@ -12,6 +12,8 @@ private:
     const Uint8* keys;
     StatusBar healthBar;
     StatusBar energyBar;
+    bool dead;
+    bool gameOver;
 
 public:
     Player(SDL_Renderer* renderer);
@@ -20,6 +22,8 @@ public:
     void render(SDL_Renderer* renderer);
     void createHealthBar(GraphicImplementSdl* graphicInterface);
     void createEnergyBar(GraphicImplementSdl* graphicInterface);
+    bool isDead() const;
+    void setDead(bool dead);
 };
 
 #endif

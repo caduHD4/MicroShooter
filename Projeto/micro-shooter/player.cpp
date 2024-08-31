@@ -1,7 +1,7 @@
 #include "player.hpp"
 #include "game.hpp"
 
-Player::Player(SDL_Renderer* renderer)
+Player::Player(SDL_Renderer* renderer) : dead(false)
 {
     Vector position = Vector(400, 400);
     Vector speed = Vector(600, 600);
@@ -11,7 +11,7 @@ Player::Player(SDL_Renderer* renderer)
     this->setHeight(60.0);
     this->setLife(3);
 
-    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 40, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
+    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
 }
 
 Player::~Player() {
@@ -25,7 +25,6 @@ void Player::update(float deltaTime) {
 void Player::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
 }
-
 
 void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
     healthBar = StatusBar();
@@ -47,4 +46,11 @@ void Player::createEnergyBar(GraphicImplementSdl* graphicInterface) {
     energyBar.setPosition(Vector(10, 40));
     energyBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
     energyBar.drawStatusBar(graphicInterface);
+
+bool Player::isDead() const {
+    return dead;
+}
+
+void Player::setDead(bool dead) {
+    this->dead = dead;
 }
