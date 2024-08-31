@@ -12,7 +12,7 @@ class Enemy : public Object {
 private:
     int direction; // 1 para direita, -1 para esquerda
     bool dead;
-    //StatusBar healthBar;
+    int points;
 
 public:
     Enemy(SDL_Renderer* renderer);
@@ -23,6 +23,14 @@ public:
     void setDead(bool dead);
     void render(SDL_Renderer* renderer);
     void createHealthBar(GraphicImplementSdl* graphicInterface);
+
+    void setPoints(int points) {
+        this->points = points;
+    }
+
+    int getPoints() {
+        return this->points;
+    }
 };
 
 #endif
