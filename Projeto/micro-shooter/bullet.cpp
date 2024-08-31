@@ -1,7 +1,7 @@
 #include "bullet.hpp"
 
 Bullet::Bullet(Vector position, SDL_Renderer* renderer) {
-    Vector speed = Vector(0, -1000);  // A velocidade é negativa para mover para cima
+    Vector speed = Vector(0, -1000);  // A velocidade Ã© negativa para mover para cima
     this->setPosition(position);
     this->setSpeed(speed);
     this->setWidth(52);

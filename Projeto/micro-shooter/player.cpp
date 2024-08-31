@@ -26,6 +26,27 @@ void Player::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
 }
 
+void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
+    healthBar = StatusBar();
+    healthBar.setWidth(300.0);
+    healthBar.setHeight(20.0);
+    healthBar.setBackgroundColor({ 255, 0, 0, 255 });
+    healthBar.setForegroundColor({ 255, 255, 0, 255 });
+    healthBar.setPosition(Vector(10, 10));
+    healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    healthBar.drawStatusBar(graphicInterface);
+}
+
+void Player::createEnergyBar(GraphicImplementSdl* graphicInterface) {
+    energyBar = StatusBar();
+    energyBar.setWidth(300.0);
+    energyBar.setHeight(20.0);
+    energyBar.setBackgroundColor({ 255, 0, 0, 255 });
+    energyBar.setForegroundColor({ 255, 69, 0, 255 });
+    energyBar.setPosition(Vector(10, 40));
+    energyBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    energyBar.drawStatusBar(graphicInterface);
+
 bool Player::isDead() const {
     return dead;
 }

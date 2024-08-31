@@ -185,6 +185,8 @@ void Game::render() {
     graphicInterface->clearRender(backgroundColor);
 
     player->render(graphicInterface->getSdlRenderer());
+    player->createHealthBar(graphicInterface);
+    player->createEnergyBar(graphicInterface);
 
     for (auto& bullet : bullets) {
         bullet->render(graphicInterface->getSdlRenderer());
