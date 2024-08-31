@@ -1,15 +1,30 @@
 #include "enemy.hpp"
 
-Enemy::Enemy() : dead(false)
+Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
 {
     Vector position = Vector(400, 400);
     Vector speed = Vector(300, 300);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(40.0);
-    this->setHeight(40.0);
+    this->setWidth(60.0);
+    this->setHeight(60.0);
     this->setLife(3);
     this->direction = 1;
+
+    sprite = new Sprite("sprite/enemySprite.png", renderer, 32, 32, 4, 0.15f);
+}
+
+Enemy::~Enemy() {
+    delete sprite;
+}
+
+void Enemy::update(float deltaTime) {
+    sprite->update(deltaTime);
+}
+
+
+void Enemy::render(SDL_Renderer* renderer) {
+    sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
 }
 
 bool Enemy::isDead() const {

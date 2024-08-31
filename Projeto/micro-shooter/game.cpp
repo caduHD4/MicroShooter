@@ -5,11 +5,8 @@
 #include "sdl_mixer.h"
 #include <cmath>
 
-Game::Game() {
+Game::Game() : isFrozen(false) {
     int init = Mix_Init(0);
-    // fundo, tela, jogador e balas
-    const Color backgroundColor = { 0, 0, 255, 255 };
-    const Color bulletColor = { 255, 255, 255, 255 };
     // Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -43,9 +40,9 @@ Game::Game() {
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
-    for (int i = 0; i < 5; ++i) { //5 inimigos
-        Enemy enemy;
-        enemy.setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+    for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
+        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+        enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
         enemies.push_back(enemy);
     }
 
@@ -82,6 +79,11 @@ Game::~Game() {
 }
 
 void Game::update(float deltaTime) {
+
+    if (isFrozen) {
+        return; 
+    }
+
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
@@ -105,6 +107,10 @@ void Game::update(float deltaTime) {
 
     player->update(deltaTime);
 
+    for (auto& enemy : enemies) {
+        enemy->update(deltaTime);
+    }
+
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
         bullet->move(deltaTime);
@@ -113,30 +119,47 @@ void Game::update(float deltaTime) {
 
     for (auto& enemy : enemies) {
         // Lógica de movimentação do inimigo
-        enemy.move(deltaTime);
+        enemy->move(deltaTime);
 
         // Lógica de colisão com balas
         for (auto bullet : bullets) {
-            if (bullet->getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
-                bullet->getPosition().x + bullet->getWidth() > enemy.getPosition().x &&
-                bullet->getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
-                bullet->getPosition().y + bullet->getHeight() > enemy.getPosition().y) {
+            if (bullet->getPosition().x < enemy->getPosition().x + enemy->getWidth() &&
+                bullet->getPosition().x + bullet->getWidth() > enemy->getPosition().x &&
+                bullet->getPosition().y < enemy->getPosition().y + enemy->getHeight() &&
+                bullet->getPosition().y + bullet->getHeight() > enemy->getPosition().y) {
                 std::cout << "Colisao com a bala!" << std::endl;
-                enemy.setLife(enemy.getLife() - 1);
-                if (enemy.getLife() <= 0) {
+                enemy->setLife(enemy->getLife() - 1);
+                if (enemy->getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
                     int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
-                    enemy.setDead(true); 
+                    enemy->setDead(true); 
                 }
                 bullet->setLife(0);
             }
         }
+
+        if (player->getPosition().x < enemy->getPosition().x + enemy->getWidth() &&
+            player->getPosition().x + player->getWidth() > enemy->getPosition().x &&
+            player->getPosition().y < enemy->getPosition().y + enemy->getHeight() &&
+            player->getPosition().y + player->getHeight() > enemy->getPosition().y) {
+            std::cout << "Colisao com o inimigo!" << std::endl;
+            player->setLife(player->getLife() - 1);
+            if (player->getLife() <= 0) {
+                std::cout << "Player destruido!" << std::endl;
+                player->setDead(true);
+                isFrozen = true;
+            }
+        }
     }
 
-    auto enemyRemover = [](Enemy& e) -> bool {
-        return e.isDead();
-        };
-    enemies.remove_if(enemyRemover);
+
+    enemies.remove_if([](Enemy* enemy) {
+        if (enemy->isDead()) {
+            delete enemy;
+            return true;
+        }
+        return false;
+        });
 
     // Remover balas fora da tela e quando a vida da bala chega a 0
     auto bulletRemover = [](Bullet* b) -> bool {
@@ -147,26 +170,29 @@ void Game::update(float deltaTime) {
         return false;
         };
     bullets.remove_if(bulletRemover);
+
 }
 
 void Game::render() {
-    const Color backgroundColor = { 0, 0, 255, 255 };
+    Color backgroundColor = { 0, 0, 255, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     const Color enemyColor = { 255, 0, 0, 255 };
+
+    if (isFrozen) {
+        backgroundColor = { 255, 0, 0, 255 }; // Muda a cor de fundo para vermelho
+    }
 
     graphicInterface->clearRender(backgroundColor);
 
     player->render(graphicInterface->getSdlRenderer());
 
     for (auto& bullet : bullets) {
-        Rect bulletRect = { bullet->getPosition(), bullet->getWidth(), bullet->getHeight() };
-        graphicInterface->drawRect(bulletRect, bulletColor);
+        bullet->render(graphicInterface->getSdlRenderer());
     }
 
     for (auto& enemy : enemies) {
-        Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
-        graphicInterface->drawRect(enemyRect, enemyColor);
-        enemy.drawHealthBar(graphicInterface);
+        enemy->render(graphicInterface->getSdlRenderer());
+        enemy->drawHealthBar(graphicInterface);
     }
 
     graphicInterface->updateRender();
@@ -177,7 +203,7 @@ void Game::shootBullet() {
     // cooldown entre tiros
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player->getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, 0));
+        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 55, -30), graphicInterface->getSdlRenderer());
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
@@ -189,9 +215,9 @@ void Game::spawnEnemies() {
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime - lastSpawnTime >= enemiesCooldown) {
         lastSpawnTime = currentTime;
-        for (int i = 0; i < 5; ++i) {
-            Enemy enemy;
-            enemy.setPosition(Vector(100 * i, 100 + 50 * i));
+        for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
+            Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+            enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
             enemies.push_back(enemy);
         }
     }

@@ -8,7 +8,10 @@
 
 class Bullet : public Object {
 public:
-    Bullet(Vector position);
+    Bullet(Vector position, SDL_Renderer* renderer);
+    ~Bullet();
+    void update(float deltaTime);
+    void render(SDL_Renderer* renderer);
 };
 
 #endif
