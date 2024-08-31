@@ -4,6 +4,7 @@ Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
 {
     Vector position = Vector(400, 400);
     Vector speed = Vector(300, 300);
+    this->setPoints(5);
     this->setPosition(position);
     this->setSpeed(speed);
     this->setWidth(60.0);

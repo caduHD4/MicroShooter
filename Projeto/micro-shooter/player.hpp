@@ -13,6 +13,7 @@ private:
     StatusBar healthBar;
     StatusBar energyBar;
     bool dead;
+    int score;
 
 public:
     Player(SDL_Renderer* renderer);
@@ -23,6 +24,18 @@ public:
     void createEnergyBar(GraphicImplementSdl* graphicInterface);
     bool isDead() const;
     void setDead(bool dead);
+    
+    void setScore(int score) {
+        this->score = score;
+    }
+
+    int getScore() {
+        return this->score;
+    }
+
+    void updateScore(int points) {
+        this->score += points;
+    }
 };
 
 #endif
