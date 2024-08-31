@@ -131,6 +131,8 @@ void Game::update(float deltaTime) {
                 enemy->setLife(enemy->getLife() - 1);
                 if (enemy->getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
+                    player->updateScore(enemy->getPoints());
+                    std::cout << "Pontuacao: " << player->getScore() << std::endl;
                     int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
                     enemy->setDead(true); 
                 }
@@ -152,14 +154,13 @@ void Game::update(float deltaTime) {
         }
     }
 
-
     enemies.remove_if([](Enemy* enemy) {
         if (enemy->isDead()) {
             delete enemy;
             return true;
         }
         return false;
-        });
+    });
 
     // Remover balas fora da tela e quando a vida da bala chega a 0
     auto bulletRemover = [](Bullet* b) -> bool {
