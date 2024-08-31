@@ -194,7 +194,7 @@ void Game::render() {
 
     for (auto& enemy : enemies) {
         enemy->render(graphicInterface->getSdlRenderer());
-        enemy->drawHealthBar(graphicInterface);
+        enemy->createHealthBar(graphicInterface);
     }
 
     graphicInterface->updateRender();
