@@ -42,7 +42,7 @@ public:
     void shootBullet();
     void spawnEnemies();
     void showGameOverScreen();
-    void showScore();
+    void resetGame();
 };
 
 #endif

@@ -85,17 +85,14 @@ Game::~Game() {
 
 void Game::update(float deltaTime) {
 
-    if (player->isDead()) {
-        showGameOverScreen();
+    if (keys != nullptr && keys[SDL_SCANCODE_C]) {
+        resetGame();
         return;
     }
 
-    showScore();
-
-    if (isFrozen) {
+    if (isFrozen==true) {
         return;
     }
-
 
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_Z]) {
@@ -196,11 +193,17 @@ void Game::render() {
         backgroundColor = { 255, 0, 0, 255 }; // Muda a cor de fundo para vermelho
     }
 
+    if (player->isDead()) {
+        showGameOverScreen();
+        return;
+    }
+
     graphicInterface->clearRender(backgroundColor);
 
     player->render(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
     player->createEnergyBar(graphicInterface);
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(600, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : bullets) {
         bullet->render(graphicInterface->getSdlRenderer());
@@ -249,14 +252,32 @@ void Game::showGameOverScreen() {
     graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(310, 350), { 255, 255, 255, 255 }); // Texto branco no centro da tela
 
     graphicInterface->updateRender();
-
-    // Espera alguns segundos antes de fechar o jogo
-    SDL_Delay(1000);
-
 }
 
-void Game::showScore() {
+void Game::resetGame() {
+    for (auto& enemy : enemies) {
+        delete enemy;
+    }
+    enemies.clear();
 
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(600, 7), {255, 255, 255, 255}); // Texto branco no centro da tela
-    graphicInterface->updateRender();
+    for (auto& bullet : bullets) {
+        delete bullet;
+    }
+    bullets.clear();
+
+
+    player->setPosition(Vector(400, 400)); 
+    player->setLife(3);
+    player->setDead(false);
+    player->setScore(0);
+
+    for (int i = 0; i < 5; ++i) { 
+        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+        enemy->setPosition(Vector(100 * i, 100 + 50 * i));
+        enemies.push_back(enemy);
+    }
+
+    isFrozen = false;
+    lastShotTime = 0;
+    lastSpawnTime = 0;
 }
