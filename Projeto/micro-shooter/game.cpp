@@ -90,6 +90,8 @@ void Game::update(float deltaTime) {
         return;
     }
 
+    showScore();
+
     if (isFrozen) {
         return;
     }
@@ -244,10 +246,17 @@ void Game::showGameOverScreen() {
     // Renderiza o texto "Game Over"
     // Supondo que você tenha uma função para renderizar texto
     graphicInterface->drawText("Game Over", Vector(310, 300), { 255, 255, 255, 255 }); // Texto branco no centro da tela
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(310, 350), { 255, 255, 255, 255 }); // Texto branco no centro da tela
 
     graphicInterface->updateRender();
 
     // Espera alguns segundos antes de fechar o jogo
     SDL_Delay(1000);
 
+}
+
+void Game::showScore() {
+
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(600, 7), {255, 255, 255, 255}); // Texto branco no centro da tela
+    graphicInterface->updateRender();
 }
