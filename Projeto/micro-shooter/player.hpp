@@ -13,7 +13,6 @@ private:
     StatusBar healthBar;
     StatusBar energyBar;
     bool dead;
-    bool gameOver;
 
 public:
     Player(SDL_Renderer* renderer);
