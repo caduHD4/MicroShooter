@@ -20,6 +20,7 @@ private:
 	float percentage = 100.0f;
 
 public:
+	StatusBar();
 	StatusBar(const StatusBarInitialization& statusBarInitialization);
 	void drawStatusBar(GraphicImplementSdl* graphicInterface);
 		
