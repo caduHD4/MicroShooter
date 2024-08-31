@@ -40,10 +40,11 @@ void Player::createEnergyBar(GraphicImplementSdl* graphicInterface) {
     energyBar = StatusBar(StatusBarInitialization{
         .width = 300.0, .backgroundColor = { 255, 0, 0, 255 }, .foregroundColor = { 255, 69, 0, 255 },
         .position = Vector(10, 40)
-    });
+        });
     energyBar.setHeight(20.0);
     energyBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
     energyBar.drawStatusBar(graphicInterface);
+}
 
 bool Player::isDead() const {
     return dead;

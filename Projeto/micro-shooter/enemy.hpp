@@ -18,7 +18,6 @@ public:
     Enemy(SDL_Renderer* renderer);
     ~Enemy();
     void update(float deltaTime);
-    void drawHealthBar(GraphicImplementSdl* graphicInterface);
     void move(float frameTime) override;
     bool isDead() const; 
     void setDead(bool dead);
