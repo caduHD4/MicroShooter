@@ -41,6 +41,7 @@ public:
     void render();
     void shootBullet();
     void spawnEnemies();
+    void showGameOverScreen();
 };
 
 #endif

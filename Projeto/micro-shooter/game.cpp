@@ -3,6 +3,7 @@
 #include "event-implement-sdl.hpp"
 #include "bullet.hpp"
 #include "sdl_mixer.h"
+#include <SDL_ttf.h>
 #include <cmath>
 
 Game::Game() : isFrozen(false) {
@@ -23,6 +24,10 @@ Game::Game() : isFrozen(false) {
     // Delay da bala
     lastShotTime = 0;
     lastSpawnTime = 0;
+
+    if (TTF_Init() == -1) {
+        std::cerr << "Failed to initialize TTF: " << TTF_GetError() << std::endl;
+    }
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(16);
@@ -80,9 +85,15 @@ Game::~Game() {
 
 void Game::update(float deltaTime) {
 
-    if (isFrozen) {
-        return; 
+    if (player->isDead()) {
+        showGameOverScreen();
+        return;
     }
+
+    if (isFrozen) {
+        return;
+    }
+
 
     if (keys != nullptr) {
         if (keys[SDL_SCANCODE_Z]) {
@@ -224,4 +235,19 @@ void Game::spawnEnemies() {
             enemies.push_back(enemy);
         }
     }
+}
+
+void Game::showGameOverScreen() {
+
+    graphicInterface->clearRender({ 0, 0, 0, 255 });
+
+    // Renderiza o texto "Game Over"
+    // Supondo que você tenha uma função para renderizar texto
+    graphicInterface->drawText("Game Over", Vector(310, 300), { 255, 255, 255, 255 }); // Texto branco no centro da tela
+
+    graphicInterface->updateRender();
+
+    // Espera alguns segundos antes de fechar o jogo
+    SDL_Delay(1000);
+
 }
