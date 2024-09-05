@@ -16,7 +16,7 @@ private:
 	Color backgroundColor;
 	Color foregroundColor;
 	Vector position;
-	float height = 5.0f;
+	float height = 8.0f;
 	float percentage = 100.0f;
 
 public:

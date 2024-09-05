@@ -3,7 +3,7 @@
 
 GraphicImplementSdl::GraphicImplementSdl()
 {
-	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 720, 720, false };
+	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, false};
 	showWindow(window);
 	createRenderer();
 }
@@ -47,7 +47,7 @@ void GraphicImplementSdl::updateRender()
 
 void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color) {
 	// Supondo que você tenha uma fonte carregada
-	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", 24);
+	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", 30);
 	if (!font) {
 		std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
 		return;

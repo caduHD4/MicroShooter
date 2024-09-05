@@ -7,8 +7,8 @@ Player::Player(SDL_Renderer* renderer) : dead(false)
     Vector speed = Vector(600, 600);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(52.0);
-    this->setHeight(60.0);
+    this->setWidth(102.0);
+    this->setHeight(110.0);
     this->setLife(3);
 
     sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
@@ -52,4 +52,20 @@ bool Player::isDead() const {
 
 void Player::setDead(bool dead) {
     this->dead = dead;
+}
+
+void Player::limiteTela(float frameTime) {
+    //Colisão com limite da tela, necessário refatorar!!
+    if (this->position.x + this->width >= 1920) {
+        this->moveLeft(frameTime);
+    }
+    if (this->position.x <= 0) {
+        this->moveRight(frameTime);
+    }
+    if (this->position.y <= 0) {
+        this->moveDown(frameTime);
+    }
+    if (this->position.y + this->width >= 1080) {
+        this->moveUp(frameTime);
+    }
 }
