@@ -24,6 +24,7 @@ public:
     void createEnergyBar(GraphicImplementSdl* graphicInterface);
     bool isDead() const;
     void setDead(bool dead);
+    void limiteTela(float frameTime);
     void updateHitbox();
     
     void setScore(int score) {

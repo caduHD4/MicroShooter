@@ -110,6 +110,7 @@ void Game::update(float deltaTime) {
     }
 
     if (keys != nullptr) {
+        player->limiteTela(deltaTime);
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
         }
@@ -217,7 +218,7 @@ void Game::render() {
     player->renderHitbox(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
     player->createEnergyBar(graphicInterface);
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(600, 7), { 255, 255, 255, 255 });
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : bullets) {
         bullet->render(graphicInterface->getSdlRenderer());
@@ -264,8 +265,8 @@ void Game::showGameOverScreen() {
 
     // Renderiza o texto "Game Over"
     // Supondo que você tenha uma função para renderizar texto
-    graphicInterface->drawText("Game Over", Vector(310, 300), { 255, 255, 255, 255 }); // Texto branco no centro da tela
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(310, 350), { 255, 255, 255, 255 }); // Texto branco no centro da tela
+    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 }); // Texto branco no centro da tela
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 }); // Texto branco no centro da tela
 
     graphicInterface->updateRender();
 }

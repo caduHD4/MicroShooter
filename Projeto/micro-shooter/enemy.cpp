@@ -7,8 +7,8 @@ Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
     this->setPoints(5);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(60.0);
-    this->setHeight(60.0);
+    this->setWidth(102.0);
+    this->setHeight(110.0);
     this->setLife(3);
     this->direction = 1;
 
@@ -44,9 +44,9 @@ void Enemy::move(float frameTime) {
     this->position.x += this->speed.x * frameTime * this->direction;
 
     // Verifica se o inimigo atingiu os limites da tela
-    if (this->position.x <= 0 || this->position.x + this->width >= 720) {
+    if (this->position.x <= 0 || this->position.x + this->width >= 1920) {
         this->direction *= -1; // Inverte a direção
-        this->position.x = std::max(0.0f, std::min(this->position.x, 720.0f - this->width));
+        this->position.x = std::max(0.0f, std::min(this->position.x, 1920.0f - this->width));
     }
 
     // Movimento vertical constante
@@ -59,7 +59,7 @@ void Enemy::move(float frameTime) {
 void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
     
     StatusBar healthBar = StatusBar(StatusBarInitialization{
-        .width = 40.0, .backgroundColor = { 255, 0, 0, 255 }, .foregroundColor = { 0, 255, 0, 255 },
+        .width = 80.0, .backgroundColor = { 255, 0, 0, 255 }, .foregroundColor = { 0, 255, 0, 255 },
         .position = this->getPosition() + Vector(0, -10)
     });
     healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);

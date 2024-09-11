@@ -56,6 +56,21 @@ void Player::setDead(bool dead) {
     this->dead = dead;
 }
 
+void Player::limiteTela(float frameTime) {
+    //Colis�o com limite da tela, necess�rio refatorar!!
+    if (this->position.x + this->width >= 1920) {
+        this->moveLeft(frameTime);
+    }
+    if (this->position.x <= 0) {
+        this->moveRight(frameTime);
+    }
+    if (this->position.y <= 0) {
+        this->moveDown(frameTime);
+    }
+    if (this->position.y + this->width >= 1080) {
+        this->moveUp(frameTime);
+}
+    
 void Player::updateHitbox() {
     hitbox.x = static_cast<int>(this->getPosition().x);
     hitbox.y = static_cast<int>(this->getPosition().y);
