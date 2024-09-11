@@ -17,9 +17,18 @@ Bullet::~Bullet() {
 
 void Bullet::update(float deltaTime) {
     sprite->update(deltaTime);
+    updateHitbox();
 }
 
 
 void Bullet::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
+    renderHitbox(renderer);
+}
+
+void Bullet::updateHitbox() {
+    hitbox.x = static_cast<int>(this->getPosition().x + 22);
+    hitbox.y = static_cast<int>(this->getPosition().y);
+    hitbox.w = static_cast<int>(10);
+    hitbox.h = static_cast<int>(24);
 }

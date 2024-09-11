@@ -19,6 +19,7 @@ public:
     ~Enemy();
     void update(float deltaTime);
     void move(float frameTime) override;
+    void updateHitbox();
     bool isDead() const; 
     void setDead(bool dead);
     void render(SDL_Renderer* renderer);

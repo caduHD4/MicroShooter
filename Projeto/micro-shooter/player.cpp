@@ -7,11 +7,11 @@ Player::Player(SDL_Renderer* renderer) : dead(false)
     Vector speed = Vector(600, 600);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(102.0);
-    this->setHeight(110.0);
+    this->setWidth(62.0);
+    this->setHeight(70.0);
     this->setLife(3);
 
-    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
+    sprite = new Sprite("sprite/playerJet.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
 }
 
 Player::~Player() {
@@ -20,10 +20,12 @@ Player::~Player() {
 
 void Player::update(float deltaTime) {
     sprite->update(deltaTime);
+    updateHitbox();
 }
 
 void Player::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
+    renderHitbox(renderer);
 }
 
 void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
@@ -55,7 +57,7 @@ void Player::setDead(bool dead) {
 }
 
 void Player::limiteTela(float frameTime) {
-    //Colisão com limite da tela, necessário refatorar!!
+    //Colisï¿½o com limite da tela, necessï¿½rio refatorar!!
     if (this->position.x + this->width >= 1920) {
         this->moveLeft(frameTime);
     }
@@ -67,5 +69,11 @@ void Player::limiteTela(float frameTime) {
     }
     if (this->position.y + this->width >= 1080) {
         this->moveUp(frameTime);
-    }
+}
+    
+void Player::updateHitbox() {
+    hitbox.x = static_cast<int>(this->getPosition().x);
+    hitbox.y = static_cast<int>(this->getPosition().y);
+    hitbox.w = static_cast<int>(62);
+    hitbox.h = static_cast<int>(70);
 }

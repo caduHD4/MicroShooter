@@ -25,6 +25,7 @@ public:
     bool isDead() const;
     void setDead(bool dead);
     void limiteTela(float frameTime);
+    void updateHitbox();
     
     void setScore(int score) {
         this->score = score;
