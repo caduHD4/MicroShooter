@@ -5,9 +5,13 @@
 #include "sdl_mixer.h"
 #include <SDL_ttf.h>
 #include <cmath>
+#include <SDL_image.h>
 
 Game::Game() : isFrozen(false) {
     int init = Mix_Init(0);
+    if (IMG_Init(IMG_INIT_PNG) == 0) {
+        std::cerr << "Failed to initialize SDL_image: " << IMG_GetError() << std::endl;
+    }
     // Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -51,6 +55,15 @@ Game::Game() : isFrozen(false) {
         enemies.push_back(enemy);
     }
 
+    SDL_Surface* tempSurface = IMG_Load("sprite/teste.png");
+    if (tempSurface == nullptr) {
+        std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
+    }
+    else {
+        backgroundTexture = SDL_CreateTextureFromSurface(graphicInterface->getSdlRenderer(), tempSurface);
+        SDL_FreeSurface(tempSurface);
+    }
+
 
     // Looping principal do jogo
     while (eventInterface->getIsRunning()) {
@@ -78,6 +91,8 @@ Game::Game() : isFrozen(false) {
 Game::~Game() {
     Mix_FreeChunk(shootEffect); // Libera a memória
     Mix_CloseAudio();
+    SDL_DestroyTexture(backgroundTexture);
+    IMG_Quit();
     delete graphicInterface;
     delete eventInterface;
     delete player;
@@ -124,6 +139,7 @@ void Game::update(float deltaTime) {
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
         bullet->move(deltaTime);
+        bullet->update(deltaTime);
     }
 
 
@@ -133,10 +149,7 @@ void Game::update(float deltaTime) {
 
         // Lógica de colisão com balas
         for (auto bullet : bullets) {
-            if (bullet->getPosition().x < enemy->getPosition().x + enemy->getWidth() &&
-                bullet->getPosition().x + bullet->getWidth() > enemy->getPosition().x &&
-                bullet->getPosition().y < enemy->getPosition().y + enemy->getHeight() &&
-                bullet->getPosition().y + bullet->getHeight() > enemy->getPosition().y) {
+            if (SDL_HasIntersection(&bullet->getHitbox(), &enemy->getHitbox())) {
                 std::cout << "Colisao com a bala!" << std::endl;
                 enemy->setLife(enemy->getLife() - 1);
                 if (enemy->getLife() <= 0) {
@@ -144,16 +157,13 @@ void Game::update(float deltaTime) {
                     player->updateScore(enemy->getPoints());
                     std::cout << "Pontuacao: " << player->getScore() << std::endl;
                     int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
-                    enemy->setDead(true); 
+                    enemy->setDead(true);
                 }
                 bullet->setLife(0);
             }
         }
 
-        if (player->getPosition().x < enemy->getPosition().x + enemy->getWidth() &&
-            player->getPosition().x + player->getWidth() > enemy->getPosition().x &&
-            player->getPosition().y < enemy->getPosition().y + enemy->getHeight() &&
-            player->getPosition().y + player->getHeight() > enemy->getPosition().y) {
+        if (SDL_HasIntersection(&player->getHitbox(), &enemy->getHitbox())) {
             std::cout << "Colisao com o inimigo!" << std::endl;
             player->setLife(player->getLife() - 1);
             if (player->getLife() <= 0) {
@@ -200,18 +210,24 @@ void Game::render() {
 
     graphicInterface->clearRender(backgroundColor);
 
+    // Renderiza a textura do background
+    SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, NULL);
+
     player->render(graphicInterface->getSdlRenderer());
+    player->renderHitbox(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
     player->createEnergyBar(graphicInterface);
     graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(600, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : bullets) {
         bullet->render(graphicInterface->getSdlRenderer());
+        bullet->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     for (auto& enemy : enemies) {
         enemy->render(graphicInterface->getSdlRenderer());
         enemy->createHealthBar(graphicInterface);
+        enemy->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     graphicInterface->updateRender();
@@ -222,7 +238,7 @@ void Game::shootBullet() {
     // cooldown entre tiros
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player->getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 55, -30), graphicInterface->getSdlRenderer());
+        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, -30), graphicInterface->getSdlRenderer());
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo

@@ -7,11 +7,11 @@ Player::Player(SDL_Renderer* renderer) : dead(false)
     Vector speed = Vector(600, 600);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(52.0);
-    this->setHeight(60.0);
+    this->setWidth(62.0);
+    this->setHeight(70.0);
     this->setLife(3);
 
-    sprite = new Sprite("sprite/PlayerSprite.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
+    sprite = new Sprite("sprite/playerJet.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
 }
 
 Player::~Player() {
@@ -20,10 +20,12 @@ Player::~Player() {
 
 void Player::update(float deltaTime) {
     sprite->update(deltaTime);
+    updateHitbox();
 }
 
 void Player::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
+    renderHitbox(renderer);
 }
 
 void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
@@ -52,4 +54,11 @@ bool Player::isDead() const {
 
 void Player::setDead(bool dead) {
     this->dead = dead;
+}
+
+void Player::updateHitbox() {
+    hitbox.x = static_cast<int>(this->getPosition().x);
+    hitbox.y = static_cast<int>(this->getPosition().y);
+    hitbox.w = static_cast<int>(62);
+    hitbox.h = static_cast<int>(70);
 }

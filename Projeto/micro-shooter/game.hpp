@@ -33,6 +33,7 @@ private:
     Mix_Chunk* shootEffect;
     Mix_Chunk* enemyDestroyedEffect;
     bool isFrozen;
+    SDL_Texture* backgroundTexture;
 
 public:
     Game();

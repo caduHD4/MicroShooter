@@ -21,12 +21,15 @@ Enemy::~Enemy() {
 
 void Enemy::update(float deltaTime) {
     sprite->update(deltaTime);
+    updateHitbox();
 }
 
 
 void Enemy::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
+    renderHitbox(renderer);
 }
+
 
 bool Enemy::isDead() const {
     return dead;
@@ -61,4 +64,12 @@ void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
     });
     healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
     healthBar.drawStatusBar(graphicInterface);
+
+}
+
+void Enemy::updateHitbox() {
+	hitbox.x = static_cast<int>(this->getPosition().x);
+	hitbox.y = static_cast<int>(this->getPosition().y);
+	hitbox.w = static_cast<int>(52);
+	hitbox.h = static_cast<int>(44);
 }
