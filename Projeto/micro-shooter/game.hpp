@@ -15,7 +15,6 @@ class Game {
 private:
     Player* player;
     std::list<Enemy*> enemies;
-    std::list<Bullet*> bullets;
     GraphicImplementSdl* graphicInterface;
     EventImplementSdl* eventInterface;
     const Uint8* keys;
@@ -23,7 +22,6 @@ private:
     float frameDelay;
     Uint32 frameStart;
     Uint32 frameTime;
-    Uint32 lastShotTime;
     Uint32 lastSpawnTime;
     Uint32 shotCooldown = 100;
     Uint32 enemiesCooldown = 150;
