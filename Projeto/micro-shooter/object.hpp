@@ -86,9 +86,9 @@ public:
         hitbox.h = static_cast<int>(this->getHeight());
     }
 
-    void renderHitbox(SDL_Renderer* renderer) {
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderDrawRect(renderer, &hitbox);
-    }
+    //void renderHitbox(SDL_Renderer* renderer) {
+    //    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    //    SDL_RenderDrawRect(renderer, &hitbox);
+    //}
 };
 #endif

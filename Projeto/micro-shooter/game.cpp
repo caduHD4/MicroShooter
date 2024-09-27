@@ -55,7 +55,7 @@ Game::Game() : isFrozen(false) {
         enemies.push_back(enemy);
     }
 
-    SDL_Surface* tempSurface = IMG_Load("sprite/teste.png");
+    SDL_Surface* tempSurface = IMG_Load("sprite/back.jpg");
     if (tempSurface == nullptr) {
         std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
     }
@@ -166,10 +166,9 @@ void Game::update(float deltaTime) {
 
         if (SDL_HasIntersection(&player->getHitbox(), &enemy->getHitbox())) {
             std::cout << "Colisao com o inimigo!" << std::endl;
-            player->setLife(player->getLife() - 1);
+            player->takeDamage(1);
             if (player->getLife() <= 0) {
                 std::cout << "Player destruido!" << std::endl;
-                player->setDead(true);
                 isFrozen = true;
             }
         }
@@ -212,23 +211,24 @@ void Game::render() {
     graphicInterface->clearRender(backgroundColor);
 
     // Renderiza a textura do background
-    SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, NULL);
+    SDL_Rect destRect = { 0, 0, 1920, 1080 }; // Ajuste conforme a resolução da sua tela
+    SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, &destRect);
 
     player->render(graphicInterface->getSdlRenderer());
-    player->renderHitbox(graphicInterface->getSdlRenderer());
+    //player->renderHitbox(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
     player->createEnergyBar(graphicInterface);
     graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : bullets) {
         bullet->render(graphicInterface->getSdlRenderer());
-        bullet->renderHitbox(graphicInterface->getSdlRenderer());
+        //bullet->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     for (auto& enemy : enemies) {
         enemy->render(graphicInterface->getSdlRenderer());
         enemy->createHealthBar(graphicInterface);
-        enemy->renderHitbox(graphicInterface->getSdlRenderer());
+        //enemy->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     graphicInterface->updateRender();

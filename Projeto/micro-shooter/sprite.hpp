@@ -16,7 +16,7 @@ public:
     Sprite(const std::string& filePath, SDL_Renderer* renderer, int frameWidth, int frameHeight, int totalFrames, float frameTime);
     ~Sprite();
     void update(float deltaTime);
-    void render(SDL_Renderer* renderer, int x, int y, int width, int height);
+    void render(SDL_Renderer* renderer, int x, int y, int width, int height, SDL_Color color = {255, 255, 255, 255});
 };
 
 #endif

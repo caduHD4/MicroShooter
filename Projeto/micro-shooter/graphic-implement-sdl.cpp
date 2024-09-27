@@ -3,7 +3,7 @@
 
 GraphicImplementSdl::GraphicImplementSdl()
 {
-	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, false};
+	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, true};
 	showWindow(window);
 	createRenderer();
 }

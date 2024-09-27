@@ -14,6 +14,11 @@ private:
     StatusBar energyBar;
     bool dead;
     int score;
+    bool isBlinking;
+    float blinkTime;
+    float blinkDuration = 1.0f; // Duração de cada piscar
+    int blinkCount;
+
 
 public:
     Player(SDL_Renderer* renderer);
@@ -26,6 +31,7 @@ public:
     void setDead(bool dead);
     void limiteTela(float frameTime);
     void updateHitbox();
+    void takeDamage(int damage);
     
     void setScore(int score) {
         this->score = score;

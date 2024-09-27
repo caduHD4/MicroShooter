@@ -1,7 +1,7 @@
 #include "player.hpp"
 #include "game.hpp"
 
-Player::Player(SDL_Renderer* renderer) : dead(false)
+Player::Player(SDL_Renderer* renderer) : dead(false), isBlinking(false), blinkTime(0.0f), blinkCount(0) 
 {
     Vector position = Vector(400, 400);
     Vector speed = Vector(600, 600);
@@ -18,14 +18,40 @@ Player::~Player() {
     delete sprite;
 }
 
+void Player::takeDamage(int damage) {
+    if (isBlinking) {
+        return;
+    }
+    this->setLife(this->getLife() - damage);
+    if (this->getLife() <= 0) {
+        this->setDead(true);
+    }
+    isBlinking = true;
+
+}
+
 void Player::update(float deltaTime) {
     sprite->update(deltaTime);
     updateHitbox();
+    if (isBlinking) {
+        blinkTime += deltaTime;
+        if (blinkTime >= blinkDuration) {
+            blinkTime = 0.0f;
+            blinkCount++;
+            if (blinkCount >= 1) { // 5 segundos, piscando 2 vezes por segundo
+                isBlinking = false;
+                blinkCount = 0;
+            }
+        }
+    }
 }
 
 void Player::render(SDL_Renderer* renderer) {
-    sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
-    renderHitbox(renderer);
+    if (isBlinking && static_cast<int>(blinkTime * 10) % 2 == 0) {
+        sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()), {255, 0, 0, 255});
+    } else {
+        sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
+    }
 }
 
 void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
@@ -69,11 +95,12 @@ void Player::limiteTela(float frameTime) {
     }
     if (this->position.y + this->width >= 1080) {
         this->moveUp(frameTime);
+    }
 }
     
 void Player::updateHitbox() {
-    hitbox.x = static_cast<int>(this->getPosition().x);
+    hitbox.x = static_cast<int>(this->getPosition().x + 10);
     hitbox.y = static_cast<int>(this->getPosition().y);
-    hitbox.w = static_cast<int>(62);
-    hitbox.h = static_cast<int>(70);
+    hitbox.w = static_cast<int>(this->getWidth() - 20);
+    hitbox.h = static_cast<int>(this->getHeight());
 }
