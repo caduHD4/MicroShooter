@@ -104,3 +104,7 @@ void Player::updateHitbox() {
     hitbox.w = static_cast<int>(this->getWidth() - 20);
     hitbox.h = static_cast<int>(this->getHeight());
 }
+
+bool Player::isBlinking() const {
+    return isBlinking;
+}
