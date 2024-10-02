@@ -3,15 +3,13 @@
 #include "event-implement-sdl.hpp"
 #include "bullet.hpp"
 #include "sdl_mixer.h"
-#include <SDL_ttf.h>
 #include <cmath>
-#include <SDL_image.h>
 
-Game::Game() : isFrozen(false) {
+Game::Game() {
     int init = Mix_Init(0);
-    if (IMG_Init(IMG_INIT_PNG) == 0) {
-        std::cerr << "Failed to initialize SDL_image: " << IMG_GetError() << std::endl;
-    }
+    // fundo, tela, jogador e balas
+    const Color backgroundColor = { 0, 0, 255, 255 };
+    const Color bulletColor = { 255, 255, 255, 255 };
     // Instancia as classes gráficas de uma classe generica
     graphicInterface = new GraphicImplementSdl();
     eventInterface = new EventImplementSdl();
@@ -29,10 +27,6 @@ Game::Game() : isFrozen(false) {
     lastShotTime = 0;
     lastSpawnTime = 0;
 
-    if (TTF_Init() == -1) {
-        std::cerr << "Failed to initialize TTF: " << TTF_GetError() << std::endl;
-    }
-
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(16);
 
@@ -49,19 +43,10 @@ Game::Game() : isFrozen(false) {
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
-    for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
-        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
-        enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+    for (int i = 0; i < 5; ++i) { //5 inimigos
+        Enemy enemy;
+        enemy.setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
         enemies.push_back(enemy);
-    }
-
-    SDL_Surface* tempSurface = IMG_Load("sprite/back.jpg");
-    if (tempSurface == nullptr) {
-        std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
-    }
-    else {
-        backgroundTexture = SDL_CreateTextureFromSurface(graphicInterface->getSdlRenderer(), tempSurface);
-        SDL_FreeSurface(tempSurface);
     }
 
 
@@ -91,26 +76,13 @@ Game::Game() : isFrozen(false) {
 Game::~Game() {
     Mix_FreeChunk(shootEffect); // Libera a memória
     Mix_CloseAudio();
-    SDL_DestroyTexture(backgroundTexture);
-    IMG_Quit();
     delete graphicInterface;
     delete eventInterface;
     delete player;
 }
 
 void Game::update(float deltaTime) {
-
-    if (keys != nullptr && keys[SDL_SCANCODE_C]) {
-        resetGame();
-        return;
-    }
-
-    if (isFrozen==true) {
-        return;
-    }
-
     if (keys != nullptr) {
-        player->limiteTela(deltaTime);
         if (keys[SDL_SCANCODE_Z]) {
             shootBullet();
         }
@@ -133,54 +105,38 @@ void Game::update(float deltaTime) {
 
     player->update(deltaTime);
 
-    for (auto& enemy : enemies) {
-        enemy->update(deltaTime);
-    }
-
     // Atualiza a posição das balas
     for (auto& bullet : bullets) {
         bullet->move(deltaTime);
-        bullet->update(deltaTime);
     }
 
 
     for (auto& enemy : enemies) {
         // Lógica de movimentação do inimigo
-        enemy->move(deltaTime);
+        enemy.move(deltaTime);
 
         // Lógica de colisão com balas
         for (auto bullet : bullets) {
-            if (SDL_HasIntersection(&bullet->getHitbox(), &enemy->getHitbox())) {
+            if (bullet->getPosition().x < enemy.getPosition().x + enemy.getWidth() &&
+                bullet->getPosition().x + bullet->getWidth() > enemy.getPosition().x &&
+                bullet->getPosition().y < enemy.getPosition().y + enemy.getHeight() &&
+                bullet->getPosition().y + bullet->getHeight() > enemy.getPosition().y) {
                 std::cout << "Colisao com a bala!" << std::endl;
-                enemy->setLife(enemy->getLife() - 1);
-                if (enemy->getLife() <= 0) {
+                enemy.setLife(enemy.getLife() - 1);
+                if (enemy.getLife() <= 0) {
                     std::cout << "Inimigo destruido!" << std::endl;
-                    player->updateScore(enemy->getPoints());
-                    std::cout << "Pontuacao: " << player->getScore() << std::endl;
                     int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
-                    enemy->setDead(true);
+                    enemy.setDead(true); 
                 }
                 bullet->setLife(0);
             }
         }
-
-        if (SDL_HasIntersection(&player->getHitbox(), &enemy->getHitbox())) {
-            std::cout << "Colisao com o inimigo!" << std::endl;
-            player->takeDamage(1);
-            if (player->getLife() <= 0) {
-                std::cout << "Player destruido!" << std::endl;
-                isFrozen = true;
-            }
-        }
     }
 
-    enemies.remove_if([](Enemy* enemy) {
-        if (enemy->isDead()) {
-            delete enemy;
-            return true;
-        }
-        return false;
-    });
+    auto enemyRemover = [](Enemy& e) -> bool {
+        return e.isDead();
+        };
+    enemies.remove_if(enemyRemover);
 
     // Remover balas fora da tela e quando a vida da bala chega a 0
     auto bulletRemover = [](Bullet* b) -> bool {
@@ -191,44 +147,26 @@ void Game::update(float deltaTime) {
         return false;
         };
     bullets.remove_if(bulletRemover);
-
 }
 
 void Game::render() {
-    Color backgroundColor = { 0, 0, 255, 255 };
+    const Color backgroundColor = { 0, 0, 255, 255 };
     const Color bulletColor = { 255, 255, 255, 255 };
     const Color enemyColor = { 255, 0, 0, 255 };
 
-    if (isFrozen) {
-        backgroundColor = { 255, 0, 0, 255 }; // Muda a cor de fundo para vermelho
-    }
-
-    if (player->isDead()) {
-        showGameOverScreen();
-        return;
-    }
-
     graphicInterface->clearRender(backgroundColor);
 
-    // Renderiza a textura do background
-    SDL_Rect destRect = { 0, 0, 1920, 1080 }; // Ajuste conforme a resolução da sua tela
-    SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, &destRect);
-
     player->render(graphicInterface->getSdlRenderer());
-    //player->renderHitbox(graphicInterface->getSdlRenderer());
-    player->createHealthBar(graphicInterface);
-    player->createEnergyBar(graphicInterface);
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : bullets) {
-        bullet->render(graphicInterface->getSdlRenderer());
-        //bullet->renderHitbox(graphicInterface->getSdlRenderer());
+        Rect bulletRect = { bullet->getPosition(), bullet->getWidth(), bullet->getHeight() };
+        graphicInterface->drawRect(bulletRect, bulletColor);
     }
 
     for (auto& enemy : enemies) {
-        enemy->render(graphicInterface->getSdlRenderer());
-        enemy->createHealthBar(graphicInterface);
-        //enemy->renderHitbox(graphicInterface->getSdlRenderer());
+        Rect enemyRect = { enemy.getPosition(), enemy.getWidth(), enemy.getHeight() };
+        graphicInterface->drawRect(enemyRect, enemyColor);
+        enemy.drawHealthBar(graphicInterface);
     }
 
     graphicInterface->updateRender();
@@ -239,7 +177,7 @@ void Game::shootBullet() {
     // cooldown entre tiros
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector playerPos = player->getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, -30), graphicInterface->getSdlRenderer());
+        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, 0));
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
@@ -251,50 +189,10 @@ void Game::spawnEnemies() {
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime - lastSpawnTime >= enemiesCooldown) {
         lastSpawnTime = currentTime;
-        for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
-            Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
-            enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+        for (int i = 0; i < 5; ++i) {
+            Enemy enemy;
+            enemy.setPosition(Vector(100 * i, 100 + 50 * i));
             enemies.push_back(enemy);
         }
     }
-}
-
-void Game::showGameOverScreen() {
-
-    graphicInterface->clearRender({ 0, 0, 0, 255 });
-
-    // Renderiza o texto "Game Over"
-    // Supondo que você tenha uma função para renderizar texto
-    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 }); // Texto branco no centro da tela
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 }); // Texto branco no centro da tela
-
-    graphicInterface->updateRender();
-}
-
-void Game::resetGame() {
-    for (auto& enemy : enemies) {
-        delete enemy;
-    }
-    enemies.clear();
-
-    for (auto& bullet : bullets) {
-        delete bullet;
-    }
-    bullets.clear();
-
-
-    player->setPosition(Vector(400, 400)); 
-    player->setLife(3);
-    player->setDead(false);
-    player->setScore(0);
-
-    for (int i = 0; i < 5; ++i) { 
-        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
-        enemy->setPosition(Vector(100 * i, 100 + 50 * i));
-        enemies.push_back(enemy);
-    }
-
-    isFrozen = false;
-    lastShotTime = 0;
-    lastSpawnTime = 0;
 }

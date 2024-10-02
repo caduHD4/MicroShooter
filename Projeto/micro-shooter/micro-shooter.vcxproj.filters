@@ -55,7 +55,6 @@
     <ClCompile Include="sprite.cpp">
       <Filter>core\src</Filter>
     </ClCompile>
-    <ClCompile Include="status-bar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphic-interface.hpp">

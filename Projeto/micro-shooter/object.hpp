@@ -15,7 +15,6 @@ protected:
     Vector speed;
     Vector position;
     Sprite* sprite;
-    SDL_Rect hitbox;
 
 public:
     Vector getSpeed() {
@@ -49,10 +48,6 @@ public:
         this->height = height;
     }
 
-    const SDL_Rect& getHitbox() const {
-        return hitbox;
-    }
-
     // Método para mover o objeto
     virtual void move(float frameTime) {
         this->position.x += this->speed.x * frameTime;
@@ -79,16 +74,5 @@ public:
         sprite->update(frameTime);
     }
 
-    void updateHitbox() {
-        hitbox.x = static_cast<int>(this->getPosition().x);
-        hitbox.y = static_cast<int>(this->getPosition().y);
-        hitbox.w = static_cast<int>(this->getWidth());
-        hitbox.h = static_cast<int>(this->getHeight());
-    }
-
-    //void renderHitbox(SDL_Renderer* renderer) {
-    //    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    //    SDL_RenderDrawRect(renderer, &hitbox);
-    //}
 };
 #endif
