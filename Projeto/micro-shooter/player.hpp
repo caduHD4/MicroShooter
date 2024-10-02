@@ -32,7 +32,7 @@ public:
     void limiteTela(float frameTime);
     void updateHitbox();
     void takeDamage(int damage);
-    bool isBlinking() const;
+    bool getIsBlinking() const;
     
     void setScore(int score) {
         this->score = score;

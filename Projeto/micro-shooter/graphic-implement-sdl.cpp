@@ -45,6 +45,10 @@ void GraphicImplementSdl::updateRender()
 	SDL_RenderPresent(getSdlRenderer());
 }
 
+SDL_Renderer* GraphicImplementSdl::getSdlRenderer() {
+	return this->sdlRenderer;
+}
+
 void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color) {
 	// Supondo que você tenha uma fonte carregada
 	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", 30);
