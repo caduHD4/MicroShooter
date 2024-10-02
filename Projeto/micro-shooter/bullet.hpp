@@ -8,11 +8,7 @@
 
 class Bullet : public Object {
 public:
-    Bullet(Vector position, SDL_Renderer* renderer);
-    ~Bullet();
-    void update(float deltaTime);
-    void render(SDL_Renderer* renderer);
-    void updateHitbox();
+    Bullet(Vector position);
 };
 
 #endif
