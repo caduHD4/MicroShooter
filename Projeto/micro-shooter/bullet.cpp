@@ -1,7 +1,6 @@
 #include "bullet.hpp"
 
-Bullet::Bullet(Vector position, SDL_Renderer* renderer) {
-    Vector speed = Vector(0, -1000);  // A velocidade é negativa para mover para cima
+Bullet::Bullet(Vector position, SDL_Renderer* renderer, Vector speed) {
     this->setPosition(position);
     this->setSpeed(speed);
     this->setWidth(52);
@@ -31,4 +30,9 @@ void Bullet::updateHitbox() {
     hitbox.y = static_cast<int>(this->getPosition().y +20);
     hitbox.w = static_cast<int>(10);
     hitbox.h = static_cast<int>(24);
+}
+
+void Bullet::moveRemoteGuided(Object* player, float frameTime) {
+    this->position.x += this->speed.x * frameTime;
+    this->position.y += this->speed.y * frameTime;
 }

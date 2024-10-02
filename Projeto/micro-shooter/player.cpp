@@ -108,3 +108,44 @@ void Player::updateHitbox() {
 bool Player::getIsBlinking() const {
     return isBlinking;
 }
+
+void Player::shootBullet(GraphicImplementSdl* graphicInterface, float frameTime) {
+    Uint32 currentTime = SDL_GetTicks();
+    // cooldown entre tiros
+    if (currentTime - lastShotTime >= shotCooldown) {
+        Vector playerPos = this->getPosition();
+        Vector bulletSpeed = Vector(0, -0.9f);
+        Bullet* newBullet = new Bullet(playerPos + Vector(this->getWidth() / 4, -30), graphicInterface->getSdlRenderer(), bulletSpeed);
+        int channel = Mix_PlayChannel(-1, shootEffect, 0);
+        bullets.push_back(newBullet);
+        lastShotTime = currentTime; // Atualiza o tempo do último disparo
+    }
+}
+
+void Player::bulletCollision(Enemy* enemy, Mix_Chunk* enemyDestroyedEffect) {
+    for (auto bullet : bullets) {
+        if (SDL_HasIntersection(&bullet->getHitbox(), &enemy->getHitbox())) {
+            std::cout << "Colisao com a bala!" << std::endl;
+            enemy->setLife(enemy->getLife() - 1);
+            if (enemy->getLife() <= 0) {
+                std::cout << "Inimigo destruido!" << std::endl;
+                this->updateScore(enemy->getPoints());
+                std::cout << "Pontuacao: " << this->getScore() << std::endl;
+                int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
+                enemy->setDead(true);
+            }
+            bullet->setLife(0);
+        }
+    }
+}
+
+void Player::removeBullets() {
+    auto bulletRemover = [](Bullet* b) -> bool {
+        if (b->getPosition().y < 0 || b->getLife() <= 0) {
+            delete b;
+            return true;
+        }
+        return false;
+    };
+    bullets.remove_if(bulletRemover);
+}

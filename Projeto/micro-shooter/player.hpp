@@ -5,6 +5,10 @@
 #include "object.hpp"
 #include "graphic-implement-sdl.hpp"
 #include "status-bar.hpp"
+#include <list>
+#include "bullet.hpp"
+#include "SDL_mixer.h"
+#include "enemy.hpp"
 
 class Player : public Object
 {
@@ -18,7 +22,10 @@ private:
     float blinkTime;
     float blinkDuration = 1.0f; // Duração de cada piscar
     int blinkCount;
-
+    Uint32 lastShotTime = 0;
+    Uint32 shotCooldown = 100;
+    Mix_Chunk* shootEffect;
+    std::list<Bullet*> bullets;
 
 public:
     Player(SDL_Renderer* renderer);
@@ -33,7 +40,10 @@ public:
     void updateHitbox();
     void takeDamage(int damage);
     bool getIsBlinking() const;
-    
+    void shootBullet(GraphicImplementSdl* graphicInterface, float frameTime);
+    void bulletCollision(Enemy* enemy, Mix_Chunk* enemyDestroyedEffect);
+    void removeBullets();
+
     void setScore(int score) {
         this->score = score;
     }
@@ -44,6 +54,14 @@ public:
 
     void updateScore(int points) {
         this->score += points;
+    }
+
+    void setBullets(std::list<Bullet*> bullets) {
+        this->bullets = bullets;
+    }
+
+    std::list<Bullet*> getBullets() {
+        return this->bullets;
     }
 };
 
