@@ -25,8 +25,6 @@ Game::Game() : isFrozen(false) {
     // Detectação das teclas
     keys = SDL_GetKeyboardState(NULL);
     Uint32 lastUpdateTick = SDL_GetTicks();
-    // Delay da bala
-    lastShotTime = 0;
     lastSpawnTime = 0;
 
     if (TTF_Init() == -1) {
@@ -100,6 +98,12 @@ Game::~Game() {
 
 void Game::update(float deltaTime) {
 
+    if (player->getLife() <= 0) {
+        std::cout << "Player destruido!" << std::endl;
+        player->setDead(true);
+        isFrozen = true;
+    }
+
     if (keys != nullptr && keys[SDL_SCANCODE_C]) {
         resetGame();
         return;
@@ -112,7 +116,7 @@ void Game::update(float deltaTime) {
     if (keys != nullptr) {
         player->limiteTela(deltaTime);
         if (keys[SDL_SCANCODE_Z]) {
-            shootBullet();
+            player->shootBullet(graphicInterface, deltaTime);
         }
         if (keys[SDL_SCANCODE_X]) {
             spawnEnemies();
@@ -133,46 +137,44 @@ void Game::update(float deltaTime) {
 
     player->update(deltaTime);
 
+    for (auto& bullet : player->getBullets()) {
+        bullet->move(frameTime);
+        bullet->update(frameTime);
+    }
+
     for (auto& enemy : enemies) {
+        enemy->shootBulletRemoteGuided(player, graphicInterface, deltaTime);
+
         enemy->update(deltaTime);
-    }
 
-    // Atualiza a posição das balas
-    for (auto& bullet : bullets) {
-        bullet->move(deltaTime);
-        bullet->update(deltaTime);
-    }
+        for (auto& bullet : enemy->getBullets()) {
+            if (bullet->getIsRemoteGuided()) {
+                bullet->moveRemoteGuided(player, frameTime);
+            } else {
+                bullet->move(frameTime);
+            }
+            bullet->update(frameTime);
+        }
 
+        for (auto bullet : enemy->getBullets()) {
+           if (SDL_HasIntersection(&bullet->getHitbox(), &player->getHitbox())) {
+               player->setLife(player->getLife() - 1);
+               bullet->setLife(0);
+           }
+        }
 
-    for (auto& enemy : enemies) {
         // Lógica de movimentação do inimigo
         enemy->move(deltaTime);
 
         // Lógica de colisão com balas
-        for (auto bullet : bullets) {
-            if (SDL_HasIntersection(&bullet->getHitbox(), &enemy->getHitbox())) {
-                std::cout << "Colisao com a bala!" << std::endl;
-                enemy->setLife(enemy->getLife() - 1);
-                if (enemy->getLife() <= 0) {
-                    std::cout << "Inimigo destruido!" << std::endl;
-                    player->updateScore(enemy->getPoints());
-                    std::cout << "Pontuacao: " << player->getScore() << std::endl;
-                    int channel = Mix_PlayChannel(-1, enemyDestroyedEffect, 0);
-                    enemy->setDead(true);
-                }
-                bullet->setLife(0);
-            }
-        }
+        player->bulletCollision(enemy, enemyDestroyedEffect);
 
         if (SDL_HasIntersection(&player->getHitbox(), &enemy->getHitbox())) {
             std::cout << "Colisao com o inimigo!" << std::endl;
             player->setLife(player->getLife() - 1);
-            if (player->getLife() <= 0) {
-                std::cout << "Player destruido!" << std::endl;
-                player->setDead(true);
-                isFrozen = true;
-            }
         }
+
+        enemy->removeBullets();
     }
 
     enemies.remove_if([](Enemy* enemy) {
@@ -183,15 +185,7 @@ void Game::update(float deltaTime) {
         return false;
     });
 
-    // Remover balas fora da tela e quando a vida da bala chega a 0
-    auto bulletRemover = [](Bullet* b) -> bool {
-        if (b->getPosition().y < 0 || b->getLife() <= 0) {
-            delete b;
-            return true;
-        }
-        return false;
-        };
-    bullets.remove_if(bulletRemover);
+    player->removeBullets();
 
 }
 
@@ -220,30 +214,22 @@ void Game::render() {
     player->createEnergyBar(graphicInterface);
     graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
 
-    for (auto& bullet : bullets) {
+    for (auto& bullet : player->getBullets()) {
         bullet->render(graphicInterface->getSdlRenderer());
         bullet->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     for (auto& enemy : enemies) {
+        for (auto& bullet : enemy->getBullets()) {
+            bullet->render(graphicInterface->getSdlRenderer());
+            bullet->renderHitbox(graphicInterface->getSdlRenderer());
+        }
         enemy->render(graphicInterface->getSdlRenderer());
         enemy->createHealthBar(graphicInterface);
         enemy->renderHitbox(graphicInterface->getSdlRenderer());
     }
 
     graphicInterface->updateRender();
-}
-
-void Game::shootBullet() {
-    Uint32 currentTime = SDL_GetTicks();
-    // cooldown entre tiros
-    if (currentTime - lastShotTime >= shotCooldown) {
-        Vector playerPos = player->getPosition();
-        Bullet* newBullet = new Bullet(playerPos + Vector(player->getWidth() / 4, -30), graphicInterface->getSdlRenderer());
-        int channel = Mix_PlayChannel(-1, shootEffect, 0);
-        bullets.push_back(newBullet);
-        lastShotTime = currentTime; // Atualiza o tempo do último disparo
-    }
 }
 
 //spawn de inimigos para testes
@@ -277,11 +263,17 @@ void Game::resetGame() {
     }
     enemies.clear();
 
-    for (auto& bullet : bullets) {
+    for (auto& bullet : player->getBullets()) {
         delete bullet;
     }
-    bullets.clear();
+    player->getBullets().clear();
 
+    for (auto& enemy : enemies) {
+        for (auto& bullet : enemy->getBullets()) {
+            delete bullet;
+        }
+        enemy->getBullets().clear();
+    }
 
     player->setPosition(Vector(400, 400)); 
     player->setLife(3);
@@ -295,6 +287,5 @@ void Game::resetGame() {
     }
 
     isFrozen = false;
-    lastShotTime = 0;
     lastSpawnTime = 0;
 }
