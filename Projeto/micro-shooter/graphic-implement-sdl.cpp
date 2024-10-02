@@ -3,7 +3,7 @@
 
 GraphicImplementSdl::GraphicImplementSdl()
 {
-	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, false};
+	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, true};
 	showWindow(window);
 	createRenderer();
 }
@@ -43,6 +43,10 @@ void GraphicImplementSdl::clearRender(const Color& colorRender)
 void GraphicImplementSdl::updateRender()
 {
 	SDL_RenderPresent(getSdlRenderer());
+}
+
+SDL_Renderer* GraphicImplementSdl::getSdlRenderer() {
+	return this->sdlRenderer;
 }
 
 void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color) {

@@ -18,6 +18,10 @@ private:
     StatusBar energyBar;
     bool dead;
     int score;
+    bool isBlinking;
+    float blinkTime;
+    float blinkDuration = 1.0f; // Duração de cada piscar
+    int blinkCount;
     Uint32 lastShotTime = 0;
     Uint32 shotCooldown = 100;
     Mix_Chunk* shootEffect;
@@ -34,6 +38,8 @@ public:
     void setDead(bool dead);
     void limiteTela(float frameTime);
     void updateHitbox();
+    void takeDamage(int damage);
+    bool getIsBlinking() const;
     void shootBullet(GraphicImplementSdl* graphicInterface, float frameTime);
     void bulletCollision(Enemy* enemy, Mix_Chunk* enemyDestroyedEffect);
     void removeBullets();

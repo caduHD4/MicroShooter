@@ -27,7 +27,7 @@ void Enemy::update(float deltaTime) {
 
 void Enemy::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
-    renderHitbox(renderer);
+    //renderHitbox(renderer);
 }
 
 
@@ -68,10 +68,10 @@ void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
 }
 
 void Enemy::updateHitbox() {
-	hitbox.x = static_cast<int>(this->getPosition().x);
-	hitbox.y = static_cast<int>(this->getPosition().y);
-	hitbox.w = static_cast<int>(52);
-	hitbox.h = static_cast<int>(44);
+	hitbox.x = static_cast<int>(this->getPosition().x +25);
+	hitbox.y = static_cast<int>(this->getPosition().y +25);
+	hitbox.w = static_cast<int>(60);
+	hitbox.h = static_cast<int>(50);
 }
 
 void Enemy::shootBullet(GraphicImplementSdl* graphicInterface, float frameTime) {
