@@ -1,8 +1,9 @@
 #include "graphic-implement-sdl.hpp"
+#include <SDL_ttf.h>
 
 GraphicImplementSdl::GraphicImplementSdl()
 {
-	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 720, 720, false };
+	const windows window = { "Microshooter", Vector(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED), 1080, 1920, true};
 	showWindow(window);
 	createRenderer();
 }
@@ -42,4 +43,27 @@ void GraphicImplementSdl::clearRender(const Color& colorRender)
 void GraphicImplementSdl::updateRender()
 {
 	SDL_RenderPresent(getSdlRenderer());
+}
+
+SDL_Renderer* GraphicImplementSdl::getSdlRenderer() {
+	return this->sdlRenderer;
+}
+
+void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color) {
+	// Supondo que você tenha uma fonte carregada
+	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", 30);
+	if (!font) {
+		std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
+		return;
+	}
+
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(sdlRenderer, surface);
+
+	SDL_Rect dstRect = { static_cast<int>(position.x), static_cast<int>(position.y), surface->w, surface->h };
+	SDL_RenderCopy(sdlRenderer, texture, NULL, &dstRect);
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+	TTF_CloseFont(font);
 }
