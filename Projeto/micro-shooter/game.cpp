@@ -158,7 +158,7 @@ void Game::update(float deltaTime) {
 
         for (auto bullet : enemy->getBullets()) {
            if (SDL_HasIntersection(&bullet->getHitbox(), &player->getHitbox())) {
-               player->setLife(player->getLife() - 1);
+               player->takeDamage(1);
                bullet->setLife(0);
            }
         }
@@ -227,7 +227,6 @@ void Game::render() {
     for (auto& enemy : enemies) {
         for (auto& bullet : enemy->getBullets()) {
             bullet->render(graphicInterface->getSdlRenderer());
-            bullet->renderHitbox(graphicInterface->getSdlRenderer());
         }
         enemy->render(graphicInterface->getSdlRenderer());
         enemy->createHealthBar(graphicInterface);
