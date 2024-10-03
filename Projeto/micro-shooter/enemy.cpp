@@ -41,7 +41,7 @@ void Enemy::setDead(bool dead) {
 
 void Enemy::move(float frameTime) {
     // Movimento em zig-zag
-    //this->position.x += this->speed.x * frameTime * this->direction;
+    this->position.x += this->speed.x * frameTime * this->direction;
 
     // Verifica se o inimigo atingiu os limites da tela
     if (this->position.x <= 0 || this->position.x + this->width >= 1920) {

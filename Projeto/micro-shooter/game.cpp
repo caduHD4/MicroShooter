@@ -144,7 +144,6 @@ void Game::update(float deltaTime) {
 
     for (auto& enemy : enemies) {
         enemy->shootBulletRemoteGuided(player, graphicInterface, deltaTime);
-
         enemy->update(deltaTime);
 
         for (auto& bullet : enemy->getBullets()) {
@@ -263,8 +262,16 @@ void Game::showGameOverScreen() {
 
 void Game::resetGame() {
     for (auto& enemy : enemies) {
+        for (auto& bullet : enemy->getBullets()) {
+            delete bullet;
+        }
+        enemy->getBullets().clear();
+    }
+
+    for (auto& enemy : enemies) {
         delete enemy;
     }
+
     enemies.clear();
 
     for (auto& bullet : player->getBullets()) {
@@ -272,23 +279,7 @@ void Game::resetGame() {
     }
     player->getBullets().clear();
 
-    for (auto& enemy : enemies) {
-        for (auto& bullet : enemy->getBullets()) {
-            delete bullet;
-        }
-        enemy->getBullets().clear();
-    }
-
-    player->setPosition(Vector(400, 400)); 
-    player->setLife(3);
-    player->setDead(false);
-    player->setScore(0);
-
-    for (int i = 0; i < 5; ++i) { 
-        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
-        enemy->setPosition(Vector(100 * i, 100 + 50 * i));
-        enemies.push_back(enemy);
-    }
+    player = new Player(graphicInterface->getSdlRenderer());
 
     isFrozen = false;
     lastSpawnTime = 0;

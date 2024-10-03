@@ -15,7 +15,10 @@ Player::Player(SDL_Renderer* renderer) : dead(false), isBlinking(false), blinkTi
 }
 
 Player::~Player() {
-    delete sprite;
+    if (sprite != nullptr) {
+        delete sprite;
+        sprite = nullptr;
+    }
 }
 
 void Player::takeDamage(int damage) {
@@ -47,6 +50,9 @@ void Player::update(float deltaTime) {
 }
 
 void Player::render(SDL_Renderer* renderer) {
+    if (sprite == nullptr) {
+        return;
+    }
     if (isBlinking && static_cast<int>(blinkTime * 10) % 2 == 0) {
         sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()), {255, 0, 0, 255});
     } else {
