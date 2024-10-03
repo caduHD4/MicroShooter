@@ -24,7 +24,7 @@ private:
     Uint32 frameTime;
     Uint32 lastSpawnTime;
     Uint32 shotCooldown = 100;
-    Uint32 enemiesCooldown = 150;
+    Uint32 enemiesCooldown = 800;
     Vector enemyDirection;
     float enemySpeed;
     float enemyTime = 0.0f;
