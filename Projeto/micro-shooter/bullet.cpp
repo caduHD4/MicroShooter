@@ -10,16 +10,6 @@ Bullet::Bullet(Vector position, SDL_Renderer* renderer, Vector speed) {
     sprite = new Sprite("sprite/mouse.png", renderer, 32, 32, 1, 0.1f);
 }
 
-Bullet::~Bullet() {
-    delete sprite;
-}
-
-void Bullet::update(float deltaTime) {
-    sprite->update(deltaTime);
-    updateHitbox();
-}
-
-
 void Bullet::render(SDL_Renderer* renderer) {
     sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
     //renderHitbox(renderer);

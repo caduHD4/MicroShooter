@@ -21,11 +21,9 @@ private:
     std::list<Bullet*> bullets;
 
 public:
-    Enemy(SDL_Renderer* renderer);
-    ~Enemy();
-    void update(float deltaTime);
+    Enemy();
+    void drawHealthBar(GraphicImplementSdl* graphicInterface);
     void move(float frameTime) override;
-    void updateHitbox();
     bool isDead() const; 
     void setDead(bool dead);
     void render(SDL_Renderer* renderer);

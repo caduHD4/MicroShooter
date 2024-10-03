@@ -1,35 +1,16 @@
 #include "enemy.hpp"
 
-Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
+Enemy::Enemy() : dead(false)
 {
     Vector position = Vector(400, 400);
     Vector speed = Vector(300, 300);
-    this->setPoints(5);
     this->setPosition(position);
     this->setSpeed(speed);
-    this->setWidth(102.0);
-    this->setHeight(110.0);
+    this->setWidth(40.0);
+    this->setHeight(40.0);
     this->setLife(3);
     this->direction = 1;
-
-    sprite = new Sprite("sprite/enemySprite.png", renderer, 32, 32, 4, 0.15f);
 }
-
-Enemy::~Enemy() {
-    delete sprite;
-}
-
-void Enemy::update(float deltaTime) {
-    sprite->update(deltaTime);
-    updateHitbox();
-}
-
-
-void Enemy::render(SDL_Renderer* renderer) {
-    sprite->render(renderer, static_cast<int>(this->getPosition().x), static_cast<int>(this->getPosition().y), static_cast<int>(this->getWidth()), static_cast<int>(this->getHeight()));
-    //renderHitbox(renderer);
-}
-
 
 bool Enemy::isDead() const {
     return dead;
@@ -44,28 +25,27 @@ void Enemy::move(float frameTime) {
     this->position.x += this->speed.x * frameTime * this->direction;
 
     // Verifica se o inimigo atingiu os limites da tela
-    if (this->position.x <= 0 || this->position.x + this->width >= 1920) {
-        this->direction *= -1; // Inverte a direção
-        this->position.x = std::max(0.0f, std::min(this->position.x, 1920.0f - this->width));
+    if (this->position.x <= 0 || this->position.x + this->width >= 720) {
+        this->direction *= -1; // Inverte a direÃ§Ã£o
+        this->position.x = std::max(0.0f, std::min(this->position.x, 720.0f - this->width));
     }
 
     // Movimento vertical constante
     this->position.y += this->speed.y * frameTime;
     if (this->position.y + this->height >= 200) {
-        this->position.y = 200.0f - this->height; // Mantém dentro dos limites
+        this->position.y = 200.0f - this->height; // MantÃ©m dentro dos limites
     }
 }
 
-void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
-    
-    StatusBar healthBar = StatusBar(StatusBarInitialization{
-        .width = 80.0, .backgroundColor = { 255, 0, 0, 255 }, .foregroundColor = { 0, 255, 0, 255 },
-        .position = this->getPosition() + Vector(0, -10)
-    });
-    healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
-    healthBar.drawStatusBar(graphicInterface);
+void Enemy::drawHealthBar(GraphicImplementSdl* graphicInterface) {
+    float healthBarWidth = this->getWidth();
+    float healthBarHeight = 5.0f;
+    float healthPercentage = static_cast<float>(this->getLife()) / 3.0f;
+    float currentHealthBarWidth = healthBarWidth * healthPercentage;
 
-}
+    if (currentHealthBarWidth > healthBarWidth) {
+        currentHealthBarWidth = healthBarWidth;
+    }
 
 void Enemy::updateHitbox() {
 	hitbox.x = static_cast<int>(this->getPosition().x +25);
@@ -83,7 +63,7 @@ void Enemy::shootBullet(GraphicImplementSdl* graphicInterface, float frameTime) 
         Bullet* newBullet = new Bullet(playerPos + Vector(this->getWidth() / 4, -30), graphicInterface->getSdlRenderer(), bulletSpeed);
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
-        lastShotTime = currentTime; // Atualiza o tempo do último disparo
+        lastShotTime = currentTime; // Atualiza o tempo do Ãºltimo disparo
     }
 }
 
@@ -109,6 +89,6 @@ void Enemy::shootBulletRemoteGuided(Object* player, GraphicImplementSdl* graphic
         newBullet->setIsRemoteGuided(true);
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
-        lastShotTime = currentTime; // Atualiza o tempo do último disparo
+        lastShotTime = currentTime; // Atualiza o tempo do Ãºltimo disparo
     }
 }
