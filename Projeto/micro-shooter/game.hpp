@@ -14,8 +14,7 @@
 class Game {
 private:
     Player* player;
-    std::list<Enemy> enemies;
-    std::list<Bullet*> bullets;
+    std::list<Enemy*> enemies;
     GraphicImplementSdl* graphicInterface;
     EventImplementSdl* eventInterface;
     const Uint8* keys;
@@ -23,15 +22,16 @@ private:
     float frameDelay;
     Uint32 frameStart;
     Uint32 frameTime;
-    Uint32 lastShotTime;
     Uint32 lastSpawnTime;
     Uint32 shotCooldown = 100;
-    Uint32 enemiesCooldown = 150;
+    Uint32 enemiesCooldown = 800;
     Vector enemyDirection;
     float enemySpeed;
     float enemyTime = 0.0f;
     Mix_Chunk* shootEffect;
     Mix_Chunk* enemyDestroyedEffect;
+    bool isFrozen;
+    SDL_Texture* backgroundTexture;
 
 public:
     Game();
@@ -40,6 +40,8 @@ public:
     void render();
     void shootBullet();
     void spawnEnemies();
+    void showGameOverScreen();
+    void resetGame();
 };
 
 #endif
