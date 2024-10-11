@@ -45,14 +45,14 @@ void Enemy::move(float frameTime) {
 
     // Verifica se o inimigo atingiu os limites da tela
     if (this->position.x <= 0 || this->position.x + this->width >= 1920) {
-        this->direction *= -1; // Inverte a direção
+        this->direction *= -1; // Inverte a direï¿½ï¿½o
         this->position.x = std::max(0.0f, std::min(this->position.x, 1920.0f - this->width));
     }
 
     // Movimento vertical constante
     this->position.y += this->speed.y * frameTime;
     if (this->position.y + this->height >= 200) {
-        this->position.y = 200.0f - this->height; // Mantém dentro dos limites
+        this->position.y = 200.0f - this->height; // Mantï¿½m dentro dos limites
     }
 }
 
@@ -83,7 +83,7 @@ void Enemy::shootBullet(GraphicImplementSdl* graphicInterface, float frameTime) 
         Bullet* newBullet = new Bullet(playerPos + Vector(this->getWidth() / 4, -30), graphicInterface->getSdlRenderer(), bulletSpeed);
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
-        lastShotTime = currentTime; // Atualiza o tempo do último disparo
+        lastShotTime = currentTime; // Atualiza o tempo do ï¿½ltimo disparo
     }
 }
 
@@ -109,6 +109,6 @@ void Enemy::shootBulletRemoteGuided(Object* player, GraphicImplementSdl* graphic
         newBullet->setIsRemoteGuided(true);
         int channel = Mix_PlayChannel(-1, shootEffect, 0);
         bullets.push_back(newBullet);
-        lastShotTime = currentTime; // Atualiza o tempo do último disparo
+        lastShotTime = currentTime; // Atualiza o tempo do ï¿½ltimo disparo
     }
 }
