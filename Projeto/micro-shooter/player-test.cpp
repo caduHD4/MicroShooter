@@ -15,6 +15,5 @@ class PlayerTest {
 int main(void) {
     PlayerTest test;
     test.testPlayerTakeDamage();
-    // Adicione mais testes conforme necessário
     return 0;
 }

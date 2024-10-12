@@ -3,7 +3,7 @@
 Enemy::Enemy(SDL_Renderer* renderer) : dead(false)
 {
     Vector position = Vector(400, 400);
-    Vector speed = Vector(300, 300);
+    Vector speed = Vector(500, 40);
     this->setPoints(5);
     this->setPosition(position);
     this->setSpeed(speed);
@@ -40,8 +40,25 @@ void Enemy::setDead(bool dead) {
 }
 
 void Enemy::move(float frameTime) {
+    int random = (rand() % 4);
+
+    switch (random)
+    {
+    case(0):
+        this->position.x += this->speed.x * frameTime * this->direction;
+        break;
+    case(1):
+        this->position.x -= this->speed.x * frameTime * this->direction;
+        break;
+    case(2):
+        this->position.y -= this->speed.y * frameTime;
+        break;
+    case(3):
+        this->position.y += this->speed.y * frameTime;
+        break;
+    }
     // Movimento em zig-zag
-    this->position.x += this->speed.x * frameTime * this->direction;
+    //this->position.x += this->speed.x * frameTime * this->direction;
 
     // Verifica se o inimigo atingiu os limites da tela
     if (this->position.x <= 0 || this->position.x + this->width >= 1920) {
@@ -50,10 +67,7 @@ void Enemy::move(float frameTime) {
     }
 
     // Movimento vertical constante
-    this->position.y += this->speed.y * frameTime;
-    if (this->position.y + this->height >= 200) {
-        this->position.y = 200.0f - this->height; // Mantém dentro dos limites
-    }
+    //this->position.y += this->speed.y * frameTime;
 }
 
 void Enemy::createHealthBar(GraphicImplementSdl* graphicInterface) {
@@ -104,7 +118,7 @@ void Enemy::shootBulletRemoteGuided(Object* player, GraphicImplementSdl* graphic
     if (currentTime - lastShotTime >= shotCooldown) {
         Vector enemyPos = this->getPosition();
         Vector bulletSpeed = player->getPosition() - enemyPos;
-        bulletSpeed.set_length(0.5f);
+        bulletSpeed.set_length(0.9f);
         Bullet* newBullet = new Bullet(enemyPos + Vector(this->getWidth() / 4, -30), graphicInterface->getSdlRenderer(), bulletSpeed);
         newBullet->setIsRemoteGuided(true);
         int channel = Mix_PlayChannel(-1, shootEffect, 0);

@@ -19,7 +19,7 @@ Game::Game() : isFrozen(false) {
 	eventInterface->setPlayer(player);
     eventInterface->setIsRunning(true);
     // Lida com o framerate
-    FPS = 60.0f;
+    FPS = 144.0f;
     frameDelay = 1000.0f / FPS;
     frameTime = 0;
     // Detectação das teclas

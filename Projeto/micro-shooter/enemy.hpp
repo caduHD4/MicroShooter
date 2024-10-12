@@ -16,7 +16,7 @@ private:
     bool dead;
     int points;
     Uint32 lastShotTime = 0;
-    Uint32 shotCooldown = 500;
+    Uint32 shotCooldown = 2000;
     Mix_Chunk* shootEffect;
     std::list<Bullet*> bullets;
 

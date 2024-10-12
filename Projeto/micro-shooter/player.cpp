@@ -9,9 +9,21 @@ Player::Player(SDL_Renderer* renderer) : dead(false), isBlinking(false), blinkTi
     this->setSpeed(speed);
     this->setWidth(62.0);
     this->setHeight(70.0);
-    this->setLife(3);
+    this->setLife(10);
 
     sprite = new Sprite("sprite/playerJet.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
+}
+
+Player::Player() : dead(false), isBlinking(false), blinkTime(0.0f), blinkCount(0)
+{
+    Vector position = Vector(400, 400);
+    Vector speed = Vector(600, 600);
+    this->setPosition(position);
+    this->setSpeed(speed);
+    this->setWidth(62.0);
+    this->setHeight(70.0);
+    this->setLife(3);
+
 }
 
 Player::~Player() {
@@ -66,7 +78,7 @@ void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
         .position = Vector(10, 10)
     });
     healthBar.setHeight(20.0);
-    healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    healthBar.setPercentage(static_cast<float>(this->getLife()) / 10.0f);
     healthBar.drawStatusBar(graphicInterface);
 }
 
@@ -76,7 +88,7 @@ void Player::createEnergyBar(GraphicImplementSdl* graphicInterface) {
         .position = Vector(10, 40)
         });
     energyBar.setHeight(20.0);
-    energyBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    energyBar.setPercentage(static_cast<float>(this->getEnergy()) / 3.0f);
     energyBar.drawStatusBar(graphicInterface);
 }
 

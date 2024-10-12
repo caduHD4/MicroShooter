@@ -29,6 +29,7 @@ private:
 
 public:
     Player(SDL_Renderer* renderer);
+    Player();
     ~Player();
     void update(float deltaTime);
     void render(SDL_Renderer* renderer);
@@ -63,6 +64,7 @@ public:
     std::list<Bullet*> getBullets() {
         return this->bullets;
     }
+
 };
 
 #endif
