@@ -47,7 +47,7 @@ Game::Game() : isFrozen(false) {
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
-    for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
+    for (int i = 0; i < 2; ++i) { // 5 inimigos iniciais
         Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
         enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
         enemies.push_back(enemy);
@@ -260,7 +260,7 @@ void Game::spawnEnemies() {
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime - lastSpawnTime >= enemiesCooldown) {
         lastSpawnTime = currentTime;
-        for (int i = 0; i < 5; ++i) { // 5 inimigos iniciais
+        for (int i = 0; i < 2; ++i) { // 5 inimigos iniciais
             Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
             enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
             enemies.push_back(enemy);

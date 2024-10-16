@@ -22,3 +22,4 @@ $(OBJDIR):
 
 clear:
 	rm -f game $(OBJS)
+
