@@ -6,6 +6,7 @@
 #include <SDL_ttf.h>
 #include <cmath>
 #include <SDL_image.h>
+#include "chrono"
 
 Game::Game() : isFrozen(false) {
     int init = Mix_Init(0);
@@ -34,9 +35,7 @@ Game::Game() : isFrozen(false) {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(16);
 
-    shootEffect = Mix_LoadWAV("audio/shoot.wav");
     enemyDestroyedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
-
 
     // Carrega a música de fundo
     Mix_Music* backgroundMusic = Mix_LoadMUS("audio/theme.wav");
@@ -47,7 +46,7 @@ Game::Game() : isFrozen(false) {
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
-    for (int i = 0; i < 2; ++i) { // 5 inimigos iniciais
+    for (int i = 0; i < 4; ++i) { // 5 inimigos iniciais
         Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
         enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
         enemies.push_back(enemy);
@@ -62,9 +61,17 @@ Game::Game() : isFrozen(false) {
         SDL_FreeSurface(tempSurface);
     }
 
-
+    auto fourseconds = std::chrono::system_clock::now() + std::chrono::milliseconds(4000);
     // Looping principal do jogo
     while (eventInterface->getIsRunning()) {
+        if (fourseconds <= std::chrono::system_clock::now()) {
+            for (int i = 0; i < 4; ++i) { // 5 inimigos iniciais
+                Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+                enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+                enemies.push_back(enemy);
+            }
+            fourseconds = std::chrono::system_clock::now() + std::chrono::milliseconds(4000);
+        }
         frameStart = SDL_GetTicks();
 
         eventInterface->handleEvents();
@@ -118,9 +125,9 @@ void Game::update(float deltaTime) {
         if (keys[SDL_SCANCODE_Z]) {
             player->shootBullet(graphicInterface, deltaTime);
         }
-        if (keys[SDL_SCANCODE_X]) {
+        /*if (keys[SDL_SCANCODE_X]) {
             spawnEnemies();
-        }
+        }*/
         if (keys[SDL_SCANCODE_LEFT]) {
             player->moveLeft(deltaTime);
         }
@@ -215,7 +222,7 @@ void Game::render() {
     player->render(graphicInterface->getSdlRenderer());
     //player->renderHitbox(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
-    player->createEnergyBar(graphicInterface);
+    //player->createEnergyBar(graphicInterface);
     graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
 
     for (auto& bullet : player->getBullets()) {
@@ -280,6 +287,11 @@ void Game::resetGame() {
     player->getBullets().clear();
 
     player = new Player(graphicInterface->getSdlRenderer());
+    for (int i = 0; i < 4; ++i) { // 5 inimigos iniciais
+        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+        enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+        enemies.push_back(enemy);
+    }
 
     isFrozen = false;
     lastSpawnTime = 0;
