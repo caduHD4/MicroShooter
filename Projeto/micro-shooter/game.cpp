@@ -149,7 +149,7 @@ void Game::update(float deltaTime) {
         bullet->update(frameTime);
     }
 
-    for (auto& enemy : enemies) {
+     for (auto& enemy : enemies) {
         enemy->shootBulletRemoteGuided(player, graphicInterface, deltaTime);
         enemy->update(deltaTime);
 
@@ -163,10 +163,10 @@ void Game::update(float deltaTime) {
         }
 
         for (auto bullet : enemy->getBullets()) {
-           if (SDL_HasIntersection(&bullet->getHitbox(), &player->getHitbox())) {
-               player->takeDamage(1);
-               bullet->setLife(0);
-           }
+            if (SDL_HasIntersection(&bullet->getHitbox(), &player->getHitbox())) {
+                player->takeDamage(1);
+                bullet->setLife(0);
+            }
         }
 
         // Lógica de movimentação do inimigo
@@ -187,8 +187,11 @@ void Game::update(float deltaTime) {
         enemy->removeBullets();
     }
 
-    enemies.remove_if([](Enemy* enemy) {
+    enemies.remove_if([this](Enemy* enemy) {
         if (enemy->isDead()) {
+            for (auto& bullet : enemy->getBullets()) {
+                remainingBullets.push_back(bullet);
+            }
             delete enemy;
             return true;
         }
@@ -197,6 +200,18 @@ void Game::update(float deltaTime) {
 
     player->removeBullets();
 
+    // Atualize as balas restantes
+    for (auto& bullet : remainingBullets) {
+        bullet->move(frameTime);
+        bullet->update(frameTime);
+    }
+    remainingBullets.remove_if([](Bullet* bullet) {
+        if (bullet->getPosition().y > 1080 || bullet->getLife() <= 0) {
+            delete bullet;
+            return true;
+        }
+        return false;
+    });
 }
 
 void Game::render() {
@@ -237,6 +252,11 @@ void Game::render() {
         enemy->render(graphicInterface->getSdlRenderer());
         enemy->createHealthBar(graphicInterface);
         //enemy->renderHitbox(graphicInterface->getSdlRenderer());
+    }
+
+        // Renderize as balas restantes
+    for (auto& bullet : remainingBullets) {
+        bullet->render(graphicInterface->getSdlRenderer());
     }
 
     graphicInterface->updateRender();

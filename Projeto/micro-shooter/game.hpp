@@ -32,6 +32,7 @@ private:
     Mix_Chunk* enemyDestroyedEffect;
     bool isFrozen;
     SDL_Texture* backgroundTexture;
+    std::list<Bullet*> remainingBullets;
 
 public:
     Game();
