@@ -9,7 +9,8 @@ Player::Player(SDL_Renderer* renderer) : dead(false), isBlinking(false), blinkTi
     this->setSpeed(speed);
     this->setWidth(62.0);
     this->setHeight(70.0);
-    this->setLife(3);
+    this->setLife(10);
+    shootEffect = Mix_LoadWAV("audio/shoot.wav");
 
     sprite = new Sprite("sprite/playerJet.png", renderer, 32, 32, 6, 0.15f); // Ajuste de parametros do sprite, tamanho, velocidade e quantidade.
 }
@@ -66,7 +67,7 @@ void Player::createHealthBar(GraphicImplementSdl* graphicInterface) {
         .position = Vector(10, 10)
     });
     healthBar.setHeight(20.0);
-    healthBar.setPercentage(static_cast<float>(this->getLife()) / 3.0f);
+    healthBar.setPercentage(static_cast<float>(this->getLife()) / 10.0f);
     healthBar.drawStatusBar(graphicInterface);
 }
 
@@ -122,7 +123,7 @@ void Player::shootBullet(GraphicImplementSdl* graphicInterface, float frameTime)
         Vector playerPos = this->getPosition();
         Vector bulletSpeed = Vector(0, -0.9f);
         Bullet* newBullet = new Bullet(playerPos + Vector(this->getWidth() / 4, -30), graphicInterface->getSdlRenderer(), bulletSpeed);
-        int channel = Mix_PlayChannel(-1, shootEffect, 0);
+        int channel = Mix_PlayChannel(-1, shootEffect, 2);
         bullets.push_back(newBullet);
         lastShotTime = currentTime; // Atualiza o tempo do último disparo
     }
