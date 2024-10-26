@@ -7,6 +7,7 @@
 #include <cmath>
 #include <SDL_image.h>
 #include "chrono"
+#include <fstream>
 
 Game::Game() : isFrozen(false) {
     int init = Mix_Init(0);
@@ -34,6 +35,7 @@ Game::Game() : isFrozen(false) {
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(16);
+    showStartMenu();
 
     enemyDestroyedEffect = Mix_LoadWAV("audio/enemy-fainted.wav");
 
@@ -46,10 +48,12 @@ Game::Game() : isFrozen(false) {
         Mix_PlayMusic(backgroundMusic, -1);
     }
 
-    for (int i = 0; i < 4; ++i) { // 5 inimigos iniciais
-        Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
-        enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
-        enemies.push_back(enemy);
+    if (!isFrozen) {
+        for (int i = 0; i < 4; ++i) { // 5 inimigos iniciais
+            Enemy* enemy = new Enemy(graphicInterface->getSdlRenderer());
+            enemy->setPosition(Vector(100 * i, 100 + 50 * i)); // Posiciona os inimigos
+            enemies.push_back(enemy);
+        }
     }
 
     SDL_Surface* tempSurface = IMG_Load("sprite/back.jpg");
@@ -76,7 +80,9 @@ Game::Game() : isFrozen(false) {
 
         eventInterface->handleEvents();
         float SecsBetweenUpdate = (SDL_GetTicks() - lastUpdateTick) / 1000.0f;
-        this->update(SecsBetweenUpdate);
+        if(!isFrozen) {
+            this->update(SecsBetweenUpdate);
+        }
         lastUpdateTick = SDL_GetTicks();
 
         this->render();
@@ -275,18 +281,6 @@ void Game::spawnEnemies() {
     }
 }
 
-void Game::showGameOverScreen() {
-
-    graphicInterface->clearRender({ 0, 0, 0, 255 });
-
-    // Renderiza o texto "Game Over"
-    // Supondo que você tenha uma função para renderizar texto
-    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 }); // Texto branco no centro da tela
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 }); // Texto branco no centro da tela
-
-    graphicInterface->updateRender();
-}
-
 void Game::resetGame() {
     for (auto& enemy : enemies) {
         for (auto& bullet : enemy->getBullets()) {
@@ -315,4 +309,138 @@ void Game::resetGame() {
 
     isFrozen = false;
     lastSpawnTime = 0;
+}
+
+void Game::showStartMenu() {
+    bool menuActive = true;
+    isFrozen = true;
+    eventInterface->setIsRunning(false);
+    int selectedOption = 0; // 0 = Iniciar, 1 = Sair, 2 = Teclas, 3 = Leaderboard
+
+    while (menuActive) {
+        graphicInterface->clearRender({ 0, 0, 0, 255 }); // Fundo preto
+
+        const SDL_Color corSelecionado = { 255, 255, 0, 255 };
+        const SDL_Color corDesselecionado = { 255, 255, 255, 255 };
+        graphicInterface->drawText("Iniciar", Vector(900, 400), selectedOption == 0 ? corSelecionado : corDesselecionado);
+        graphicInterface->drawText("Sair", Vector(900, 450), selectedOption == 1 ? corSelecionado : corDesselecionado);
+        graphicInterface->drawText("Leaderboard", Vector(900, 500), selectedOption == 2 ? corSelecionado : corDesselecionado);
+        graphicInterface->drawText("Teclas: Movimento [Setas], Tiro [Z], Bomba [X]", Vector(900, 550), corDesselecionado);
+
+        graphicInterface->updateRender();
+
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                menuActive = false;
+                eventInterface->setIsRunning(false);
+            }
+            if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                case SDLK_UP:
+                    selectedOption = (selectedOption > 0) ? selectedOption - 1 : 2;
+                    break;
+                case SDLK_DOWN:
+                    selectedOption = (selectedOption < 2) ? selectedOption + 1 : 0;
+                    break;
+                case SDLK_RETURN:
+                    if (selectedOption == 0) {
+                        isFrozen = false;
+                        eventInterface->setIsRunning(true);
+                        menuActive = false; // Começa o jogo
+                    }
+                    else if (selectedOption == 1) {
+                        menuActive = false;
+                        eventInterface->setIsRunning(false); // Sai do jogo
+                    }
+                    else if (selectedOption == 2) {
+                        showLeaderboard(); // Exibe o leaderboard
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void Game::showLeaderboard() {
+    graphicInterface->clearRender({ 0, 0, 0, 255 });
+    std::ifstream scoreFile("scores.txt");
+    std::string line;
+    int yOffset = 300;
+
+    if (scoreFile.is_open()) {
+        graphicInterface->drawText("Leaderboard", Vector(850, 200), { 255, 255, 255, 255 });
+
+        while (getline(scoreFile, line)) {
+            graphicInterface->drawText(line, Vector(850, yOffset), { 255, 255, 255, 255 });
+            yOffset += 30; // Distância entre linhas
+        }
+        scoreFile.close();
+    }
+    else {
+        graphicInterface->drawText("Erro ao carregar leaderboard", Vector(850, 200), { 255, 0, 0, 255 });
+    }
+
+    graphicInterface->updateRender();
+
+    // Espera o jogador pressionar uma tecla para sair do leaderboard
+    SDL_Event event;
+    bool leaderboardActive = true;
+    while (leaderboardActive) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_KEYDOWN) {
+                leaderboardActive = false; // Sai do leaderboard
+            }
+        }
+    }
+}
+
+void Game::showGameOverScreen() {
+    graphicInterface->clearRender({ 0, 0, 0, 255 });
+    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 });
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 });
+    graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 });
+    graphicInterface->updateRender();
+
+    std::string initials = "";
+    SDL_Event event;
+    bool enterPressed = false;
+
+    while (!enterPressed) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z && initials.size() < 3) {
+                    initials += static_cast<char>(event.key.keysym.sym);
+                }
+                else if (event.key.keysym.sym == SDLK_BACKSPACE && !initials.empty()) {
+                    initials.pop_back();  // Remove a última letra
+                }
+                else if (event.key.keysym.sym == SDLK_RETURN && initials.size() == 3) {
+                    enterPressed = true;  // Pressionou Enter com 3 letras
+                }
+
+                // Atualiza a tela com as letras digitadas
+                graphicInterface->clearRender({ 0, 0, 0, 255 });
+                graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 });
+                graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 });
+                graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 });
+                graphicInterface->drawText("Iniciais: " + initials, Vector(880, 600), { 255, 255, 255, 255 });
+                graphicInterface->updateRender();
+            }
+        }
+    }
+
+    // Salva o nome e a pontuação no arquivo
+    std::ofstream scoreFile("scores.txt", std::ios::app);
+    if (scoreFile.is_open()) {
+        scoreFile << initials << " : " << player->getScore() << "\n";
+        scoreFile.close();
+    }
+    else {
+        std::cerr << "Erro ao salvar pontuação" << std::endl;
+    }
+
+    // Retorna ao menu inicial após salvar
+    showStartMenu();
 }

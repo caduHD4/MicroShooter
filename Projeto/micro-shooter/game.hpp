@@ -43,6 +43,8 @@ public:
     void spawnEnemies();
     void showGameOverScreen();
     void resetGame();
+    void showStartMenu();
+    void showLeaderboard();
 };
 
 #endif
