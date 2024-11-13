@@ -19,7 +19,7 @@ public:
     void cleanWindow() override final;
     void clearRender(const Color&) override final;
     void updateRender() override final;
-    void drawText(const std::string& text, const Vector& position, const SDL_Color& color);
+    void drawText(const std::string& text, const Vector& position, const SDL_Color& color, const int& fontSize);
     SDL_Renderer* getSdlRenderer(); // Implementação correta
 
     SDL_Window* getWindow()

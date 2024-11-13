@@ -45,6 +45,7 @@ public:
     void resetGame();
     void showStartMenu();
     void showLeaderboard();
+    void showEndCredits();
 };
 
 #endif

@@ -244,7 +244,7 @@ void Game::render() {
     //player->renderHitbox(graphicInterface->getSdlRenderer());
     player->createHealthBar(graphicInterface);
     //player->createEnergyBar(graphicInterface);
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 });
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(1750, 7), { 255, 255, 255, 255 }, 30);
 
     for (auto& bullet : player->getBullets()) {
         bullet->render(graphicInterface->getSdlRenderer());
@@ -318,14 +318,27 @@ void Game::showStartMenu() {
     int selectedOption = 0; // 0 = Iniciar, 1 = Sair, 2 = Teclas, 3 = Leaderboard
 
     while (menuActive) {
-        graphicInterface->clearRender({ 0, 0, 0, 255 }); // Fundo preto
+
+        SDL_Surface* tempSurface = IMG_Load("sprite/matrix.jpg");
+        if (tempSurface == nullptr) {
+            std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
+        }
+        else {
+            backgroundTexture = SDL_CreateTextureFromSurface(graphicInterface->getSdlRenderer(), tempSurface);
+            SDL_FreeSurface(tempSurface);
+            SDL_Rect destRect = { 0, 0, 1920, 1080 }; // Ajuste conforme a resolução da sua tela
+            SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, &destRect);
+        }
 
         const SDL_Color corSelecionado = { 255, 255, 0, 255 };
         const SDL_Color corDesselecionado = { 255, 255, 255, 255 };
-        graphicInterface->drawText("Iniciar", Vector(900, 400), selectedOption == 0 ? corSelecionado : corDesselecionado);
-        graphicInterface->drawText("Sair", Vector(900, 450), selectedOption == 1 ? corSelecionado : corDesselecionado);
-        graphicInterface->drawText("Leaderboard", Vector(900, 500), selectedOption == 2 ? corSelecionado : corDesselecionado);
-        graphicInterface->drawText("Teclas: Movimento [Setas], Tiro [Z], Bomba [X]", Vector(900, 550), corDesselecionado);
+        graphicInterface->drawText("Iniciar", Vector(900, 400), selectedOption == 0 ? corSelecionado : corDesselecionado, 30);
+        graphicInterface->drawText("Sair", Vector(900, 450), selectedOption == 1 ? corSelecionado : corDesselecionado, 30);
+        graphicInterface->drawText("Leaderboard", Vector(900, 500), selectedOption == 2 ? corSelecionado : corDesselecionado, 30);
+        graphicInterface->drawText("Creditos", Vector(900, 550), selectedOption == 3 ? corSelecionado : corDesselecionado, 30);
+        graphicInterface->drawText("Comandos", Vector(950, 600), corDesselecionado, 30);
+        graphicInterface->drawText("Movimentos: Setas", Vector(900, 650), corDesselecionado, 30);
+        graphicInterface->drawText("Tiro: Z", Vector(900, 700), corDesselecionado, 30);
 
         graphicInterface->updateRender();
 
@@ -338,10 +351,10 @@ void Game::showStartMenu() {
             if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                 case SDLK_UP:
-                    selectedOption = (selectedOption > 0) ? selectedOption - 1 : 2;
+                    selectedOption = (selectedOption > 0) ? selectedOption - 1 : 3;
                     break;
                 case SDLK_DOWN:
-                    selectedOption = (selectedOption < 2) ? selectedOption + 1 : 0;
+                    selectedOption = (selectedOption < 3) ? selectedOption + 1 : 0;
                     break;
                 case SDLK_RETURN:
                     if (selectedOption == 0) {
@@ -350,11 +363,14 @@ void Game::showStartMenu() {
                         menuActive = false; // Começa o jogo
                     }
                     else if (selectedOption == 1) {
-                        menuActive = false;
                         eventInterface->setIsRunning(false); // Sai do jogo
+                        menuActive = false;
                     }
                     else if (selectedOption == 2) {
                         showLeaderboard(); // Exibe o leaderboard
+                    }
+                    else if (selectedOption == 3) {
+                        showEndCredits(); // Exibe o leaderboard
                     }
                     break;
                 }
@@ -364,22 +380,31 @@ void Game::showStartMenu() {
 }
 
 void Game::showLeaderboard() {
-    graphicInterface->clearRender({ 0, 0, 0, 255 });
+    SDL_Surface* tempSurface = IMG_Load("sprite/matrix.jpg");
+    if (tempSurface == nullptr) {
+        std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
+    }
+    else {
+        backgroundTexture = SDL_CreateTextureFromSurface(graphicInterface->getSdlRenderer(), tempSurface);
+        SDL_FreeSurface(tempSurface);
+        SDL_Rect destRect = { 0, 0, 1920, 1080 }; // Ajuste conforme a resolução da sua tela
+        SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, &destRect);
+    }
     std::ifstream scoreFile("scores.txt");
     std::string line;
     int yOffset = 300;
 
     if (scoreFile.is_open()) {
-        graphicInterface->drawText("Leaderboard", Vector(850, 200), { 255, 255, 255, 255 });
+        graphicInterface->drawText("Leaderboard", Vector(850, 200), { 255, 255, 255, 255 }, 30);
 
         while (getline(scoreFile, line)) {
-            graphicInterface->drawText(line, Vector(850, yOffset), { 255, 255, 255, 255 });
+            graphicInterface->drawText(line, Vector(850, yOffset), { 255, 255, 255, 255 }, 30);
             yOffset += 30; // Distância entre linhas
         }
         scoreFile.close();
     }
     else {
-        graphicInterface->drawText("Erro ao carregar leaderboard", Vector(850, 200), { 255, 0, 0, 255 });
+        graphicInterface->drawText("Erro ao carregar leaderboard", Vector(850, 200), { 255, 0, 0, 255 }, 30);
     }
 
     graphicInterface->updateRender();
@@ -398,9 +423,9 @@ void Game::showLeaderboard() {
 
 void Game::showGameOverScreen() {
     graphicInterface->clearRender({ 0, 0, 0, 255 });
-    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 });
-    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 });
-    graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 });
+    graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 }, 30);
+    graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 }, 30);
+    graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 }, 30);
     graphicInterface->updateRender();
 
     std::string initials = "";
@@ -422,10 +447,10 @@ void Game::showGameOverScreen() {
 
                 // Atualiza a tela com as letras digitadas
                 graphicInterface->clearRender({ 0, 0, 0, 255 });
-                graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 });
-                graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 });
-                graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 });
-                graphicInterface->drawText("Iniciais: " + initials, Vector(880, 600), { 255, 255, 255, 255 });
+                graphicInterface->drawText("Game Over", Vector(880, 480), { 255, 255, 255, 255 }, 30);
+                graphicInterface->drawText("Score: " + std::to_string(player->getScore()), Vector(880, 520), { 255, 255, 255, 255 }, 30);
+                graphicInterface->drawText("Digite 3 letras e pressione Enter:", Vector(880, 560), { 255, 255, 255, 255 }, 30);
+                graphicInterface->drawText("Iniciais: " + initials, Vector(880, 600), { 255, 255, 255, 255 }, 30);
                 graphicInterface->updateRender();
             }
         }
@@ -443,4 +468,34 @@ void Game::showGameOverScreen() {
 
     // Retorna ao menu inicial após salvar
     showStartMenu();
+}
+
+void Game::showEndCredits() {
+    SDL_Surface* tempSurface = IMG_Load("sprite/matrix.jpg");
+    if (tempSurface == nullptr) {
+        std::cerr << "Erro ao carregar a imagem de fundo: " << IMG_GetError() << std::endl;
+    }
+    else {
+        backgroundTexture = SDL_CreateTextureFromSurface(graphicInterface->getSdlRenderer(), tempSurface);
+        SDL_FreeSurface(tempSurface);
+        SDL_Rect destRect = { 0, 0, 1920, 1080 }; // Ajuste conforme a resolução da sua tela
+        SDL_RenderCopy(graphicInterface->getSdlRenderer(), backgroundTexture, NULL, &destRect);
+    }
+    graphicInterface->drawText("Creditos finais", Vector(700, 100), { 255, 255, 255, 255 }, 50);
+    graphicInterface->drawText("Desenvolvido por: Carlos Eduardo e Leonardo Sarto", Vector(500, 240), { 255, 255, 255, 255 }, 30);
+    graphicInterface->drawText("Disciplinas ministradas: Topicos em Computacao e Projeto de Software Avancado", Vector(500, 300), { 255, 255, 255, 255 }, 30);
+    graphicInterface->drawText("Orientado pelos professores: Eduardo Henrique e Helio Kamakawa", Vector(500, 350), { 255, 255, 255, 255 }, 30);
+    graphicInterface->drawText("Pressione qualquer tecla para voltar ao Menu inicial", Vector(500, 400), { 255, 255, 255, 255 }, 30);
+    graphicInterface->updateRender();
+
+    SDL_Event event;
+    bool showEndCredits = true;
+
+    while (showEndCredits) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_KEYDOWN) {
+                showEndCredits = false;
+            }
+        }
+    }
 }

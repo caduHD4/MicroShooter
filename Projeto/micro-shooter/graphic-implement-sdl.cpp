@@ -49,9 +49,9 @@ SDL_Renderer* GraphicImplementSdl::getSdlRenderer() {
 	return this->sdlRenderer;
 }
 
-void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color) {
+void GraphicImplementSdl::drawText(const std::string& text, const Vector& position, const SDL_Color& color, const int& fontSize) {
 	// Supondo que você tenha uma fonte carregada
-	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", 30);
+	TTF_Font* font = TTF_OpenFont("fonte/gameover.ttf", fontSize);
 	if (!font) {
 		std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
 		return;
